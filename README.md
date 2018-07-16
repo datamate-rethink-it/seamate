@@ -38,15 +38,22 @@ Additionally, the following two elements can be modified in the main element (th
 The custom CSS field in the Branding box can be used to manipulate any other CSS classes not addressed by Seamate. Any specification must be made in [common CSS syntax](https://www.w3schools.com/css/css_syntax.asp). 
 
 ## Installation
+Before proceeding with the installation, we recommend backing up the Seahub folder in the current Seafile Server folder ~/seafile-server-latest/.
 
 ### FTP
-0. Safety first: Go to the current Seafile Server folder ~/seafile-server-latest/ and backup the seahub folder (~200MB)
-1. Download Seamate and unzip to find several folders
+1. Download seamate_1.0_x86-64.zip from GitHub and unzip the file to find several folders
 2. Copy the content of the folder which fits your Seafile version into ~/seafile-server-latest/ - some new files are created, some overwritten (disregard the other folders)
 3. Restart seahub
 
-### Bash
-...
+### SSH/Bash
+1. Log in as Seafile user (= the user that runs Seafile; this user can but need not be "seafile") 
+2. Change directory to the current Seafile Server folder ~/seafile-server-latest/
+3. Wget the seamate_1.0_x86-64.zip from GitHub
+4. Unzip the downloaded file and confirm the prompts to replace existing files ('A' confirms all prompts)
+5. Restart seahub
+6. Delelete
+
+If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually. 
 
 ## Change log
 ### Seamate 1.0 (DATE)
