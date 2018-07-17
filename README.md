@@ -83,9 +83,9 @@ As a rule, a Seamate version that works with the community server also works nic
 
 ### Seafile Server Professional Edition
 
-| Seafile 6.3.0     | Seafile 6.2.x     | Seafile 6.1.x       | Seafile 5.x         |
-| ----              | -----             | ----                | ---                 |
-| Seamate 1.0       | untested          | untested            | untested            |      
+| Seafile 6.3.2     | Seafile 6.3.1     | Seafile 6.3.0       | Seafile 6.2.x     | Seafile 6.1.x       | Seafile 5.x         |
+| ----              | -----             | ----               | ----             | ---                | ---                 |
+| not available     | not available     | Seamate 1.0         | untested          | untested            | untested            |      
 
 ## Outlook
 Seamate is a first step, but there are many ideas for extensions:
