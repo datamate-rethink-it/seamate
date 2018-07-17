@@ -52,10 +52,12 @@ Pleas also check the compatability list below.
 1. Log in as Seafile user (= the user that runs Seafile; this user can but need not be "seafile")
 2. Change directory to the current Seafile Server folder ~/seafile-server-latest/
 3. Select the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (the first 'x.x' is the version of the Seamate, the x.x.x indicates the seafile version)
-4. Clone the branch into the folder ~/seafile-server-latest/ ```git clone --single-branch -b x.x_x.x.x_x86-64 https://github.com/datamate-rethink-it/seamate.git```
-5. The files will be downloaded into the folder /seamate/ now move all files inside /seamate/ into /seahub/ ```mv seamate/ seahub```
-5. Restart seahub
-6. Delete the empty /seamate/ folder 
+4. Clone the branch into the folder ~/seafile-server-latest/
+```git clone --single-branch -b x.x_x.x.x_x86-64 https://github.com/datamate-rethink-it/seamate.git```
+5. The files will be downloaded into the folder /seamate/ now move all files inside /seamate/ into /seahub/ 
+```mv seamate/ seahub```
+6. Restart seahub
+7. Delete the empty /seamate/ folder
 
 If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually.
 
