@@ -1,0 +1,579 @@
+/*******************************
+Custom CSS for Seamate customizer.
+Copyright by Datamate.
+***
+Structure
+
+1- Global settings
+2- Custom Login settings
+3- Top bar settings
+4- Navigation sidebar settings
+5- Main section settings
+6- Popup settings
+7- Customizer settings
+8- Global overrides
+*********************************/
+
+/*** 1- Gobal settings ***/
+body, input, textarea, button, select {
+    font: 13px/1.5 var(--global-font);
+    color: #333;
+    word-wrap: break-word;
+}
+.panel-top, #header {
+    border-bottom-width: var(--global-border-thickness) ;
+    border-bottom-style: solid;
+    border-bottom-color: var(--global-border-color);
+}
+.side-nav, .home-side-nav {
+  border-right-width: var(--global-border-thickness) ;
+  border-right-style: solid;
+  border-right-color: var(--global-border-color);
+}
+button, input[type=submit], input[type=button], input.submit, .sf-btn-link,
+.fileinput-button, select, #simplemodal-container, .sf-dropdown-menu, .sf-popover, .list-view-icon-btn, .grid-view-icon-btn{
+  border-radius: var(--global-border-radius);
+  border: 1px solid transparent;
+}
+
+
+/*** 3- Top bar settings ***/
+a#logo img{
+  width: auto;
+}
+.panel-top, #header, .panel-top .sf-popover, .account-popup{
+  background: var(--top-background);
+  box-shadow: none;
+}
+.btn-white{
+  background: var(--top-icbu);
+  color: var(--top-link);
+}
+.btn-white:hover{
+  background: var(--top-icbu-hover);
+  color: var(--top-link-hover);
+}
+#notifications .sf2-icon-bell, #my-info {
+  color: var(--top-icbu);
+}
+#notifications .sf2-icon-bell:hover, #my-info:hover{
+  color: var(--top-icbu-hover);
+}
+button.sf-dropdown-toggle:focus{
+  background-color: var(--top-icbu-hover) !important;
+}
+.add{
+  color: var(--top-link);
+}
+.btn-white:hover > .add{
+  color: var(--top-link-hover);
+}
+.account-popup .txt, .account-popup .item{
+  color: var(--top-text);
+}
+#my-usage, #quota-usage, #traffic-stat{
+  color: var(--top-text);
+}
+.up-outer-caret .inner-caret {
+    border-bottom-color: var(--top-background);
+}
+.account-popup a.item {
+    color: var(--top-link);
+}
+.account-popup a.item:hover {
+    background: transparent;
+    color: var(--top-link-hover);
+}
+.account-popup #logout.item{
+    border-bottom: 0px solid #ddd;
+}
+.panel-top .sf-dropdown-menu {
+    position: absolute;
+    background: var(--top-background);
+    border: 0px solid transparent;
+}
+.panel-top .sf-dropdown-menu a, .panel-top .sf-dropdown-menu li a {
+    color: var(--top-link);
+}
+.panel-top .sf-dropdown-menu a:hover {
+    background: var(--top-background);
+    color: var(--top-link-hover);
+}
+.account-popup .item {
+    border-bottom: 1px solid var(--top-text);
+}
+#quota-bar {
+    border: 1px solid var(--top-text);
+}
+.sf-popover-title{
+  color: var(--top-text);
+}
+#notice-popover .view-all{
+  color: var(--top-link);
+}
+#notice-popover .view-all:hover{
+  color: var(--top-link-hover);
+  text-decoration: none;
+}
+.sf-popover-hd {
+  border-bottom: 1px solid var(--top-text);
+}
+.sf-popover-close {
+    color: var(--top-icbu);
+}
+.sf-popover-close:hover{
+  color: var(--top-icbu-hover);
+}
+.grid-view-icon-btn.active, .list-view-icon-btn.active {
+    color: var(--top-icbu);
+    background: var(--top-background);
+}
+.grid-view-icon-btn.active:hover, .list-view-icon-btn.active:hover {
+    color: var(--top-icbu);
+    background: var(--top-background);
+}
+.grid-view-icon-btn:hover, .list-view-icon-btn:hover {
+    color: var(--top-link-hover);
+    background: var(--top-icbu-hover);
+}
+.grid-view-icon-btn, .list-view-icon-btn {
+    color: var(--top-link);
+    background: var(--top-icbu);
+}
+.panel-top .menu-inner-divider {
+    border-top: 1px solid var(--top-text);
+}
+#lang-context{
+  color: var(--top-link);
+}
+#lang-context:hover{
+  color: var(--top-link-hover);
+}
+
+
+
+/*** 4- Navigation settings ***/
+.home-side-nav, .side-nav-footer, .side-nav{
+  background-color: var(--nav-background);
+}
+.side-tabnav-tabs .tab a {
+    padding: 12px 4px 12px 0;
+    color: var(--nav-link);
+}
+.side-tabnav-tabs .tab [class^="sf2-icon-"] {
+    color: var(--nav-icbu);
+}
+.side-tabnav-tabs .tab a:hover {
+    background-color: transparent;
+    color: var(--nav-link-hover);
+}
+.side-panel h3, .side-textnav h3{
+  color: var(--nav-text);
+}
+.side-tabnav-tabs .tab a:hover > [class^="sf2-icon-"] {
+    color: var(--nav-icbu-hover);
+}
+.side-tabnav-tabs .tab-cur a, .side-tabnav-tabs .tab-cur a:hover {
+    background-color: transparent;
+    color: var(--nav-link-hover);
+}
+.side-tabnav-tabs .tab-cur a > [class^="sf2-icon-"], .side-tabnav-tabs .tab-cur a:hover > [class^="sf2-icon-"] {
+    color: var(--nav-icbu-hover);
+}
+#group-nav .sharp, #share-admin-nav .sharp, .side-tabnav h3.hd, .side-tabnav .hd h3{
+    color: var(--nav-text);
+}
+.side-nav-footer .item {
+    color: var(--nav-link);
+}
+.side-nav-footer .item:hover {
+    color: var(--nav-link-hover);
+    text-decoration: none;
+}
+.side-textnav-tabs .tab a {
+    color: var(--nav-link);
+    border-bottom: none;
+}
+.side-textnav-tabs .tab a:hover {
+    color: var(--nav-link-hover);
+}
+#group-nav .toggle-icon, #share-admin-nav .toggle-icon {
+    color: var(--nav-text);
+}
+
+
+
+
+/*** 5- Main section settings ***/
+p, h2.alc, h4.activity-group-hd {
+  color: var(--main-text);
+}
+.main-panel-main time {
+  color: var(--main-text);
+}
+.cur-view-path {
+    background: transparent;
+}
+.cur-view-path h3{
+  color: var(--main-text);
+}
+.empty-tips{
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+.main-panel-main, #main{
+  background: var(--main-background);
+}
+.main-panel a, #groups .group-name .a{
+  color: var(--main-link);
+}
+.main-panel a:hover,#groups .group-name .a{
+  color: var(--main-link-hover);
+  text-decoration: none;
+}
+.main-panel .hl{
+  background-color: transparent;
+}
+.main-panel td, .path-split, .cur-view-path-path{
+  color: var(--main-text);
+}
+.main-panel th{
+  color: var(--main-text);
+  font-weight: bold;
+}
+.main-panel th a{
+  font-weight: bold;
+}
+.main-panel th, .main-panel td, .event-item, .activity-group-hd {
+    padding: 10px 3px;
+    border-bottom-color: var(--main-table-border-color);
+    border-bottom-style: solid;
+    border-bottom-width: var(--main-table-border-thickness);
+}
+.cur-view-path:after {
+  border-bottom-color: var(--main-table-border-color);
+  border-bottom-style: solid;
+  border-bottom-width: var(--main-table-border-thickness);
+}
+.repo-file-list .icon-star-empty {
+    color: var(--main-icbu);
+}
+.repo-file-list .icon-star-empty:hover {
+    color: var(--main-icbu-hover);
+}
+.repo-file-list .icon-star {
+    color: var(--main-icbu-hover);
+}
+.repo-file-list .icon-star:hover {
+    color: var(--main-icbu);
+}
+.op-icon.sf2-x, .dir-toolbar-2 .op-link{
+  color: var(--main-icbu);
+}
+.op-icon.sf2-x:hover, .dir-toolbar-2 .op-link:hover {
+  color: var(--main-icbu-hover);
+}
+.op-icon.sf2-x:hover, .op-icon.sf2-x:focus {
+    text-decoration: none;
+}
+.main-panel .sf-dropdown-menu {
+  background-color: var(--main-background);
+}
+.main-panel .sf-dropdown-menu li a, .main-panel .sf-dropdown-menu a {
+    color: var(--main-link);
+}
+.main-panel .sf-dropdown-menu li a:hover, .main-panel .sf-dropdown-menu a:hover {
+    color: var(--main-link-hover);
+    background-color: transparent;
+}
+.main-panel .menu-inner-divider {
+    border-top: 1px solid var(--main-text);
+}
+.web-setting-cur-img{
+  width: auto;
+}
+#main a{
+  color: var(--main-link);
+}
+#main a:hover{
+  color: var(--main-link-hover);
+}
+.setting-item h3 {
+    color: var(--main-text);
+    border-bottom-color: var(--main-table-border-color);
+    border-bottom-style: solid;
+    border-bottom-width: var(--main-table-border-thickness);
+}
+#right-panel h2, h2.repo-trash-hd, #wide-panel-noframe h2{
+  color: var(--main-text);
+}
+
+/** GRID VIEW **/
+.grid-item .text-link {
+    color: var(--main-link);
+}
+.grid-item .text-link:hover {
+    color: var(--main-link-hover);
+}
+.grid-item .text-link.hl, .grid-item .img-link.hl {
+  background-color: transparent;
+}
+.grid-item .thumbnail {
+    border: 0px solid transparent;
+}
+/** help page **/
+.help-con, .article h3, .article h4, .article h5, .article h6 {
+  color: var(--main-text);
+}
+/** data details and comments **/
+@media (min-width: 768px){
+.details-panel, .comments-panel {
+    width: 320px;
+    border-left-width: var(--global-border-thickness) ;
+    border-left-style: solid;
+    border-left-color: var(--global-border-color);
+}}
+.details-panel-hd, .comments-panel-hd {
+    background: none;
+    border-bottom: none;
+}
+.details-panel-hd h3, .comments-panel-hd h3{
+    color: var(--main-text);
+}
+.comments-panel-footer .msg-form {
+    border-top: none;
+}
+.msg-form {
+    background: none;
+    border-top: none;
+}
+
+/** file view **/
+#view-hd, #view-hd h2, #view-hd time, #view-hd span{
+  color: var(--top-text);
+}
+#view-hd .sf-btn-group a, .file-view-op button {
+  border-radius: var(--global-border-radius);
+  color: var(--top-link);
+  background-color: var(--top-icbu);
+}
+#view-hd .sf-btn-group a:hover, .file-view-op button:hover {
+  color: var(--top-link-hover);
+  background-color: var(--top-icbu-hover);
+}
+
+/** wiki ***/
+#wiki-last-modified, #wiki-page-last-modified, h3.wiki-pages-heading {
+    color: var(--main-text);
+}
+
+.wiki-page-link {
+    color: var(--main-link);
+}
+.wiki-page-link:hover {
+    color: var(--main-link-hover);
+}
+
+a#edit-page.sf-btn-link.btn-white, a#page-history.sf-btn-link.btn-white{
+  background: var(--main-icbu);
+  color: var(--main-link);
+}
+a#edit-page.sf-btn-link.btn-white:hover, a#page-history.sf-btn-link.btn-white:hover{
+  background: var(--main-icbu-hover);
+  color: var(--main-link-hover);
+}
+
+/** search fixxes **/
+.highlight-content b{
+  color: var(--main-link);
+}
+.highlight-content{
+  color: var(--main-text);
+}
+#search-results .time{
+  color: var(--main-text);
+}
+.search-results-item .parent-dir-link {
+    color: var(--main-link);
+}
+.search-results-item .parent-dir-link:hover, #search-results a:hover{
+    color: var(--main-link-hover);
+    text-decoration: none;
+}
+#search-results .tip{
+  color: var(--main-text);
+}
+#search-results a {
+    font-weight: normal;
+    color: var(--main-link);
+}
+
+
+/** statistics **/
+#statistic-chart {
+  background-color: #fffffff9;
+  border-radius: var(--global-border-radius)
+}
+
+
+
+/** Paperbin and Versionhistory**/
+.repo-file-list-topbar, .commit-list-topbar, .file-audit-list-topbar, .repo-trash-hd .op-target, #wide-panel-noframe .op-target {
+    color: var(--main-text);
+    background: transparent;
+}
+#wide-panel-noframe a{
+  color: var(--main-link);
+}
+#wide-panel-noframe a:hover{
+  color: var(--main-link-hover);
+}
+#wide-panel-noframe .hl, #right-panel .hl {
+    background-color: transparent;
+}
+#wide-panel-noframe th, #wide-panel-noframe td, #right-panel th, #right-panel td {
+  border-bottom-color: var(--main-table-border-color);
+  border-bottom-style: solid;
+  border-bottom-width: var(--main-table-border-thickness);
+}
+#wide-panel-noframe th, #wide-panel-noframe td, #wide-panel-noframe .tip, #right-panel th, #right-panel td {
+  color: var(--main-text);
+}
+
+
+/** Main Admin Panel **/
+#right-panel dd, #right-panel dt{
+  color: var(--main-text);
+}
+#right-panel a{
+  color: var(--main-link);
+}
+#right-panel a:hover{
+  color: var(--main-link-hover);
+}
+#right-panel .op-icon{
+  color: var(--main-icbu);
+}
+#right-panel .op-icon:hover{
+  color: var(--main-icbu-hover);
+}
+#right-panel .hd .ui-state-active .a, #right-panel .hd .a:hover {
+    color: var(--main-link);
+    border-bottom-color: var(--main-link);
+}
+#right-panel .hd .a:hover {
+  color: var(--main-link-hover);
+  border-bottom-color: var(--main-link-hover);
+}
+.seahub-web-settings, #right-panel .tip, #paginator{
+  color: var(--main-text);
+}
+#right-panel button{
+  background: var(--main-icbu);
+  color: var(--main-link);
+}
+#right-panel button:hover{
+  background: var(--main-icbu-hover);
+  color: var(--main-link-hover);
+}
+#right-panel .tabnav-tab a:hover{
+    border-bottom-color: var(--main-link-hover);
+}
+.seahub-web-settings h4, .seahub-web-settings h3 {
+    color: #696969;
+}
+#right-panel .hd, .tabnav, .repo-file-list-topbar, .commit-list-topbar, .file-audit-list-topbar, #dir-view .repo-op, .wiki-top {
+    color: #696969;
+}
+
+
+
+/*** 6- POPUPS ***/
+#simplemodal-container {
+  color: var(--popups-text);
+  background: var(--popups-background);
+}
+#simplemodal-container h3{
+  color: var(--popups-text);
+}
+#simplemodal-container .op-target, #simplemodal-container .tip {
+    color: var(--popups-text);
+}
+#simplemodal-container a {
+    color: var(--popups-link);
+}
+#share-popup a, #share-popup a:hover{
+  background: transparent;
+}
+#simplemodal-container a:hover, #simplemodal-container a:active {
+    color: var(--popups-link-hover);
+}
+#simplemodal-container button, #simplemodal-container input[type="submit"]{
+  background: var(--popups-icbu);
+  color: var(--popups-link)
+}
+#simplemodal-container button:hover, #simplemodal-container input[type="submit"]:hover{
+  background: var(--popups-icbu-hover);
+  color: var(--popups-link-hover)
+}
+#simplemodal-container th, #simplemodal-container td {
+    border-bottom: 1px solid var(--popups-text);
+    color: var(--popups-text);
+}
+
+
+
+
+
+/*** 7- Customizer settings ***/
+.accordion {
+    color: var(--main-text);
+    cursor: pointer;
+    padding: 5px 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+#right-panel button.accordion, button.accordion:hover{
+  background: none;
+}
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+.panel {
+    padding: 15px;
+    display: none;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+/*** 8- Global overrides ***/
+input:focus, button:focus, select:focus, textarea:focus {
+    border-color: transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.grid-item-op {
+    box-shadow: 0 0px 0px transparent;
+}
+.side-nav-footer {
+    border-top: none;
+}
+@media (min-width: 768px){
+  .cur-view-toolbar:before {
+    border-left: 0px solid #ddd;
+  }
+  .nav-con-tabs-nav .ui-state-active a, .nav-con-tabs-nav .ui-state-active a:hover {
+    background: none;
+  }
+}

@@ -1,0 +1,269 @@
+
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block sub_title %}{% trans "Log In" %} - {% endblock %}
+{% block header_css_class %}hide{% endblock %}
+{% block extra_style %}
+<style type="text/css">
+html, body, #wrapper { height:100%; }
+#wrapper {
+    background: url('{{ MEDIA_URL }}{{login_bg_image_path}}') center top no-repeat scroll;
+    background-size: cover;
+}
+#lang {
+    margin:0;
+}
+#lang-context {
+    font-weight:normal;
+}
+#lang-context-selector {
+    text-align:left;
+}
+#main {
+  background: none;
+}
+</style>
+  {% if LOGIN_ENABLE %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}login.css" />
+  {% endif %}
+{% endblock %}
+
+{% block main_content %}
+{% if LOGIN_ENABLE %}
+<div class="limiter">
+  <div class="container-login100 " onmousemove="isvalue()">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form login-panel-outer-container" action="" method="post">{% csrf_token %}
+
+        <div class="container">
+
+          <h2>Login</h2>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group position-relative">
+                <input type="text" class="form-m" name="login" id="name" required="required" placeholder="" aria-label="{% trans "Email or Username" %}" title="{% trans "Email or Username" %}">
+                <span class="bar"></span>
+                <label class="label-m">{% trans "Email or Username" %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group position-relative">
+                <input class="form-m" type="password" name="password" id="passwd" title="{% trans "Password" %}" value="">
+                <span class="bar"></span>
+                <label class="label-m">{% trans "Password" %}</label>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          {% if form.captcha %}
+          <div class="ovhd">
+              <span id="refresh-captcha" title="{% trans "Refresh" %}" class="icon-refresh op-icon fright"></span>
+              {{ form.captcha }}
+          </div>
+          {% endif %}
+
+          <input type="hidden" name="next" value="{% if next %}{{ next|escape }}{% else %}{{ SITE_ROOT }}{% endif %}" />
+          {% if form.errors %}
+          {% if form.captcha.errors %}
+          {{ form.captcha.errors}}
+          {% elif form.errors.freeze_account %}
+          <p class="error">{{ form.errors.freeze_account }}</p>
+          {% elif form.errors.inactive %}
+          <p class="error">{{ form.errors.inactive }}</p>
+          {% else %}
+          <p class="error">{% trans "Incorrect email or password" %}</p>
+          {% endif %}
+          {% else %}
+          <p class="error hide"></p>
+          {% endif %}
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="styled-input-single styled-input--square">
+                <input type="checkbox" name="remember_me" id="checkbox2-example-three" />
+                <label for="checkbox2-example-three">{% blocktrans %}Remember me for {{remember_days}} days {% endblocktrans %}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <button type="submit" class="login-submit">{% trans "Log In" %}</button>
+            </div>
+            <div class="col-md-6" style="text-align:right">
+              <a href="{{ SITE_ROOT }}accounts/password/reset/" class="normal forgot-passwd">{% trans "Forgot password?" %}</a><br>
+              {% if enable_signup %}
+              <a href="{{ signup_url }}" class="normal" id="sign-up">{% trans "Signup" %}</a>
+              {% endif %}
+              <div class="login-panel-bottom-container"></div>
+            </div>
+          </div>
+
+          <div id="poweredby">powered by <a href="https://www.datamate.org" target="_blank" alt="Datamate die Seafile Experten">datamate.org</a></div>
+        </div><!---END CONTAINER-->
+      </form>
+      <div class="login100-more" style="background-image: url('{{ MEDIA_URL }}{{login_bg_image_path}}');">
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="login-panel-outer-container vh">
+<div class="login-panel">
+    <h1 class="login-panel-hd">{% trans "Log In" %}</h1>
+    <form action="" method="post">{% csrf_token %}
+        <input type="text" name="login" placeholder="{% trans "Email or Username" %}" aria-label="{% trans "Email or Username" %}" title="{% trans "Email or Username" %}" value="" class="input name-input" /><br />
+        <input type="password" name="password" placeholder="{% trans "Password" %}" aria-label="{% trans "Password" %}" title="{% trans "Password" %}" value="" class="input passwd-input" autocomplete="off" />
+
+        {% if form.captcha %}
+        <div class="ovhd">
+            <span id="refresh-captcha" title="{% trans "Refresh" %}" class="icon-refresh op-icon fright"></span>
+            {{ form.captcha }}
+        </div>
+        {% endif %}
+
+        <input type="hidden" name="next" value="{% if next %}{{ next|escape }}{% else %}{{ SITE_ROOT }}{% endif %}" />
+        {% if form.errors %}
+        {% if form.captcha.errors %}
+        {{ form.captcha.errors}}
+        {% elif form.errors.freeze_account %}
+        <p class="error">{{ form.errors.freeze_account }}</p>
+        {% elif form.errors.inactive %}
+        <p class="error">{{ form.errors.inactive }}</p>
+        {% else %}
+        <p class="error">{% trans "Incorrect email or password" %}</p>
+        {% endif %}
+        {% else %}
+        <p class="error hide"></p>
+        {% endif %}
+
+        <label class="checkbox-label remember">
+            <input type="checkbox" name="remember_me" class="vam remember-input" />
+            <span class="vam">{% blocktrans %}Remember me for {{remember_days}} days {% endblocktrans %}</span>
+        </label>
+        <a href="{{ SITE_ROOT }}accounts/password/reset/" class="normal forgot-passwd">{% trans "Forgot password?" %}</a>
+
+        <button type="submit" class="submit">{% trans "Log In" %}</button>
+    </form>
+
+    {% if enable_sso %}
+    <a id="sso" href="#" class="normal">{% trans "Single Sign-On" %}</a>
+    {% endif %}
+
+    <div class="login-panel-bottom-container">
+        {% if enable_signup %}
+        <a href="{{ signup_url }}" class="normal fleft" id="sign-up">{% trans "Signup" %}</a>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript">
+{% if LOGIN_ENABLE %}
+$('.form-m').keyup(function(){
+  var ths = $(this);
+  ths.val() ? ths.addClass('is-value') : ths.removeClass('is-value');
+});
+
+
+function isvalue(){
+
+  if($('#name').val() == ''){
+         $('#name').removeClass("is-value");
+  }
+
+  if(!$('#name').val() == ''){
+         $('#name').addClass("is-value");
+  }
+
+  if($('#passwd').val() == ''){
+         $('#passwd').removeClass("is-value");
+  }
+
+  if(!$('#passwd').val() == ''){
+         $('#passwd').addClass("is-value");
+  }
+
+}
+{% endif %}
+$('.login-panel-outer-container').prepend($($('#logo').html()).attr({'width': 160, 'height':40}).addClass('login-panel-logo'));
+$('.login-panel-bottom-container').append($('#lang').removeClass('fright'));
+
+var $el = $('.login-panel-outer-container');
+var elHeight = $el.outerHeight();
+var wdHeight = $(window).height();
+if (wdHeight > elHeight) {
+    $el.css({'margin-top': (wdHeight - elHeight)/2});
+}
+$('#lang').css({'margin-left': $('#sign-up').outerWidth() + 10});
+$el.removeClass('vh');
+
+$('#lang-context-selector').css({
+    'top': '-' + ($('#lang').offset().top - 5) + 'px',
+    'right': 0
+});
+$('#lang-context-selector .sf-popover-con').css({
+    'max-height': $('#lang').offset().top - 10
+});
+
+$('[name="login"]').trigger('focus');
+
+function setCaptchaInputWidth() {
+    $('#id_captcha_1').outerWidth($('.input').outerWidth() - $('.captcha').width() - $('#refresh-captcha').outerWidth(true) - 10);
+}
+$(window).on('load', setCaptchaInputWidth);
+$('.captcha').on('load', setCaptchaInputWidth);
+$('#refresh-captcha').on('click', function() {
+    $.ajax({
+        url: '{% url 'captcha-refresh' %}',
+        dataType:'json',
+        cache:false,
+        success: function(data) {
+            $('.captcha').attr('src', data['image_url']);
+            $('#id_captcha_0').val(data['key']);
+        },
+        error: function() {
+            $('.error').removeClass('hide').html("{% trans "Failed to refresh the CAPTCHA, please try again later." %}");
+        }
+    });
+    return false;
+});
+
+$('.login-panel form').on('submit', function(){
+    if (!$.trim($('input[name="login"]').val())) {
+        $('.error').removeClass('hide').html("{% trans "Email or username cannot be blank" %}");
+        return false;
+    }
+    if (!$.trim($('input[name="password"]').val())) {
+        $('.error').removeClass('hide').html("{% trans "Password cannot be blank" %}");
+        return false;
+    }
+});
+// set tabindex
+$(function() {
+    $('input:not([type="hidden"])').each(function(index) {
+        $(this).attr('tabindex', index + 1);
+    });
+});
+
+{% if enable_sso %}
+$(function() {
+    $('#sso').on('click', function() {
+        window.location = "{% url 'sso' %}{% if next %}?next={{ next|escape }}{% endif %}" + encodeURIComponent(document.location.hash);
+        return false;
+    });
+});
+{% endif %}
+
+</script>
+{% endblock %}
