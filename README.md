@@ -40,7 +40,7 @@ The custom CSS field in the Branding box can be used to manipulate any other CSS
 ## Installation
 Before proceeding with the installation, we recommend backing up the Seahub folder in the current Seafile Server folder ~/seafile-server-latest/.
 
-Pleas also check the compatability list below.
+Please also check the compatability list below.
 
 ### FTP
 1. Download the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (the first 'x.x' is the version of the Seamate, the x.x.x indicates the seafile version)
