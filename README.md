@@ -1,4 +1,4 @@
-Seamate is an add-on for [Seahub](https://github.com/haiwen/seahub), the web interface of the file syncing and sharing software [Seafile](https://github.com/haiwen/seafile), that allows the easy modification of Seahub‘s look. 
+Seamate is an add-on for [Seahub](https://github.com/haiwen/seahub), the web interface of the file syncing and sharing software [Seafile](https://github.com/haiwen/seafile), that allows the easy modification of Seahub‘s look.
 
 It integrates in the global settings of Seahub and requires no coding knowledge whatsoever. Modifying Seahub to meet your personal / corporate standards is no more than changing a few field values in the familiar Seahub settings.
 
@@ -13,7 +13,7 @@ The implementation approach entails the following consequences:
 Seahub employs several hundred CSS classes. With Seamate, some 35 can be modified right within Seahub. Why "only" this small fraction? Things get unwieldy quickly! We believe -- till proven wrong -- that the set of configurable parameters meets the demand of the large majority of Seamate users. For all other users, more classes would mean more headache. Additionally, all those that wish to take the customization of Seahub even further can still import separate custom HTML/CSS files or make use of the custom CSS in the Seahub settings.
 
 ## Use
-Open Seahub's admin panel, click on Settings and scroll down to the Branding section. 
+Open Seahub's admin panel, click on Settings and scroll down to the Branding section.
 
 Seahub-wide (global) settings can be set and individual changes made to Seahub's five central UI elements (login, top bar, navigation sidebar, main, and popups). Whenever possible, colorpickers or dropdown lists are provided for ease of use.
 
@@ -35,7 +35,7 @@ Additionally, the following two elements can be modified in the main element (th
 * Border color                  [MAIN_TABLE_BORDER_COLOR]
 * Border thickness              [MAIN_TABLE_BORDER_THICKNESS]
 
-The custom CSS field in the Branding box can be used to manipulate any other CSS classes not addressed by Seamate. Any specification must be made in [common CSS syntax](https://www.w3schools.com/css/css_syntax.asp). 
+The custom CSS field in the Branding box can be used to manipulate any other CSS classes not addressed by Seamate. Any specification must be made in [common CSS syntax](https://www.w3schools.com/css/css_syntax.asp).
 
 ## Installation
 Before proceeding with the installation, we recommend backing up the Seahub folder in the current Seafile Server folder ~/seafile-server-latest/.
@@ -43,19 +43,21 @@ Before proceeding with the installation, we recommend backing up the Seahub fold
 Pleas also check the compatability list below.
 
 ### FTP
-1. Download the archive seamate_x.x_x86-64.zip from GitHub ('x.x' is the version of the Seamate version) and unzip the file to find several folders
-2. Copy the content of the folder which fitting your Seafile version into ~/seafile-server-latest/ - some new files are created, some overwritten (disregard the other folders)
-3. Restart seahub
+1. Download the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (the first 'x.x' is the version of the Seamate, the x.x.x indicates the seafile version)
+2. Unzip the file to find several folders
+3. Copy the content of the folder which fitting your Seafile version into ~/seafile-server-latest/ - some new files are created, some overwritten (disregard the other folders)
+4. Restart seahub
 
 ### SSH/Bash
-1. Log in as Seafile user (= the user that runs Seafile; this user can but need not be "seafile") 
+1. Log in as Seafile user (= the user that runs Seafile; this user can but need not be "seafile")
 2. Change directory to the current Seafile Server folder ~/seafile-server-latest/
-3. Wget the archive seamate_x.x_x86-64.zip from GitHub ('x.x' is the version of the Seamate version)
-4. Unzip the downloaded file and confirm the prompts to replace existing files ('A' confirms all prompts)
+3. Select the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (the first 'x.x' is the version of the Seamate, the x.x.x indicates the seafile version)
+4. Clone the branch into the folder ~/seafile-server-latest/ ```git clone --single-branch -b x.x_x.x.x_x86-64 https://github.com/datamate-rethink-it/seamate.git```
+5. The files will be downloaded into the folder /seamate/ now move all files inside /seamate/ into /seahub/ ```mv seamate/ seahub```
 5. Restart seahub
-6. Delelete
+6. Delete the empty /seamate/ folder 
 
-If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually. 
+If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually.
 
 ## Change log
 ### Seamate 1.0 (DATE)
@@ -65,11 +67,11 @@ Release statement in the [Seafile Forum](...)
 
 
 ## Compatability list
-Seamate can be used with Seafile's community as well as professional server. 
+Seamate can be used with Seafile's community as well as professional server.
 
 As a rule, a Seamate version that works with the community server also works nicely with the professional server and vice versa. Since the CSS classes for the two servers partially vary, there may be exceptions. For more details, see compatability tables below which shows known working combinations.
 
-### Seafile Server Community Edition 
+### Seafile Server Community Edition
 
 | Seafile 6.3.2     | Seafile 6.3.1     | Seafile 6.3.0       | Seafile 6.2.x       | Seafile 6.1.x       | Seafile 5.x       |
 | ----              | -----             | ----                | ---                 | ---                 | ---               |
