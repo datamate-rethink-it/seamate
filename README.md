@@ -55,8 +55,8 @@ Please also check the compatability list below.
 3. Select the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (the first 'x.x' is the version of the Seamate, the x.x.x indicates the seafile version)
 4. Clone the branch into the current folder (~/seafile-server-latest/):   
 ```git clone --single-branch -b x.x_x.x.x_x86-64 https://github.com/datamate-rethink-it/seamate.git```
-5. The files will be downloaded into the folder /seamate/. Now copy all files inside /seamate/ into /seahub/:   
-```cp -rv seamate/* seahub/``` (-v show where the files are copied)
+5. The files will be downloaded into the folder /seamate/. Now copy all files inside /seamate/ into ~/seafile-server-latest:   
+```cp -rv seamate/* ./``` (-v show where the files are copied)
 6. Restart seahub
 7. (Optional) Delete the /seamate/ folder:   
 ```rm -r seamate```
