@@ -68,7 +68,7 @@ If you have downloaded/unzipped the file with another user than the Seafile user
 If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually.
 
 ## Change log
-### Seamate 1.0 (DATE)
+### Seamate 1.0 (18.07.2018)
 Initial release of Seamate
 
 Release statement in the [Seafile Forum](https://forum.seafile.com/t/introducing-seamate-an-easy-to-use-seahub-customizer/6648)
