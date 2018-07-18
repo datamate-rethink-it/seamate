@@ -71,7 +71,7 @@ If you have downloaded/unzipped the file with another user than the Seafile user
 ### Seamate 1.0 (DATE)
 Initial release of Seamate
 
-Release statement in the [Seafile Forum](...)
+Release statement in the [Seafile Forum](https://forum.seafile.com/t/introducing-seamate-an-easy-to-use-seahub-customizer/6648)
 
 
 ## Compatability list
