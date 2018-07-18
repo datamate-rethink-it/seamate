@@ -8,7 +8,7 @@ Seamate expands the Branding section in the settings menu in Seahub's admin pane
 The implementation approach entails the following consequences:
 * ENABLE_SETTINGS_VIA_WEB = True in seahub_settings.py: Unless web settings are enabled, custom changes must be made directly in seahub-settings.py, but Seamate's CSS classes (see below) can be used.
 * Seamate integrates on a low level: Changes made in custom HTML or CSS files overwrite changes made in Seamate.
-* Seamate can't handle Seafile upgrades: When you upgrade Seafile, Seahub loads a fresh set of HTML templates and the changes do not apply any more.
+* Seamate can't handle Seafile upgrades, but custom settings can be recovered: When you upgrade Seafile, Seahub loads a fresh set of HTML templates and the changes do not apply any more. Just install Seamate another time following the instructions below to bring back your Seahub custom skin.
 
 Seahub employs several hundred CSS classes. With Seamate, some 35 can be modified right within Seahub. Why "only" this small fraction? Things get unwieldy quickly! We believe -- till proven wrong -- that the set of configurable parameters meets the demand of the large majority of Seamate users. For all other users, more classes would mean more headache. Additionally, all those that wish to take the customization of Seahub even further can still import separate custom HTML/CSS files or make use of the custom CSS in the Seahub settings.
 
@@ -43,12 +43,12 @@ Before proceeding with the installation, we recommend backing up the Seahub fold
 Please also check the compatability list below.
 
 ### FTP
-1. Pick the right branch for your seafile version from GitHub. Branches are named x.x_x.x.x_x86-64 (x.x being the version of Seamate, y.y.y indicating the Seafile version).
+1. Pick the right branch for your seafile version from GitHub. Branches are named x.x_y.y.y_x86-64 (x.x being the version of Seamate, y.y.y indicating the Seafile version).
 2. Click on "Clone or download" and select "Download ZIP" to retrieve an archive name "seamate-1.0_6.3.0_x86-64.zip" or similar.
 3. Unzip the archive with your preferred unzipper. (Note: Depending on how you unzip, the folder structure varies.)
 4. Open the unzipped folder until you see the README.md and the folder "seahub".
-5. Drag the seahub folder into your remote directory ~/seafile-server-latest/ - some new files are created, some overwritten (disregard the other folders).
-6. Restart seahub.
+5. Drag the seahub folder into your remote directory ~/seafile-server-latest/ using your FTP client - some new files are created, some overwritten (disregard the other folders).
+6. Restart seahub via bash.
 
 If you have downloaded/unzipped the file with another user than the Seafile user, you have to change ownership to the Seafile user manually.
 
