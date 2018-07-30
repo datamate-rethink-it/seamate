@@ -33,7 +33,7 @@
 <form class="web-setting-form web-input-setting-form" action="">
     <h5 class="web-setting-name">{{ setting_display_name }}</h5>
     <div class="web-setting-input">
-        <input type="text" name="NAV_BACKGROUND" value="{{ setting_value_nav_background }}" data-cur="{{ setting_value_nav_background }}"/>
+        <input class="input jscolor" type="text" name="NAV_BACKGROUND" value="{{ setting_value_nav_background }}" data-cur="{{ setting_value_nav_background }}"/>
     </div>
     <div class="web-setting-ops">
         <button type="submit" title="{{ setting_display_name }} {% trans "Submit" %}">{{ setting_display_name }} {% trans "Submit" %}</button>
