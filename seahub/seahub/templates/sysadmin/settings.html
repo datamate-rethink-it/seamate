@@ -477,6 +477,10 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
         $input = $form.hasClass('web-input-setting-form') ? $('.input', $form) : $('.textarea', $form),
         $sb_btn = $('.submit', $form),
         $cancel_btn = $('.cancel', $form),
+        i;
+
+for (i = 0; i < elements.length; i += 1) {
+
         key = $input.attr('name'),
         value = $.trim($input.val());
 
@@ -515,6 +519,7 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
         }
     });
     return false;
+  };
 });
 
 
