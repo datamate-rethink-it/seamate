@@ -472,7 +472,9 @@ $('.web-setting-checkbox').on('change', function() {
 });
 
 $('.web-preset-setting-form').on('submit', function(){
-  console.log("Hellow");
+  var $form = $(this),
+      value = $form.getElementById("preset-option").value;
+  console.log(value);
 });
 
 $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function() {
