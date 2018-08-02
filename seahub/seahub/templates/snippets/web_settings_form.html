@@ -30,14 +30,17 @@
 {% endif %}
 
 {% if type == 'input_presets' %}
-<form class="web-setting-form web-input-setting-form" action="">
+<form class="web-setting-form web-preset-setting-form" action="">
     <h5 class="web-setting-name">{{ setting_display_name }}</h5>
     <div class="web-setting-input">
-        <input class="input jscolor" type="text" name="NAV_BACKGROUND" value="{{ setting_value_nav_background }}" data-cur="{{ setting_value_nav_background }}"/>
-        <input class="input jscolor" type="text" name="MAIN_BACKGROUND" value="{{ setting_value_main_background }}" data-cur="{{ setting_value_main_background }}"/>
+        <select class="preset-color">
+          <option selected="selected">Choose a Color Preset</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+        </select>
     </div>
     <div class="web-setting-ops">
-        <button type="submit" title="{% trans "Submit" %}">{{ setting_display_name }} {% trans "Submit" %}</button>
+        <button type="submit" title="{% trans "Submit" %}">{% trans "Submit" %}</button>
     </div>
 </form>
 {% endif %}

@@ -51,7 +51,7 @@
     <button class="accordion">0 - Presets</button>
     <div class="panel">
 
-      {% with type="input_presets" setting_display_name="Green Preset" setting_value_nav_background="#ff00ff" setting_value_main_background="#00ffff" %}
+      {% with type="input_presets" setting_display_name="Color Preset" %}
           {% include "snippets/web_settings_form.html" %}
       {% endwith %}
 
@@ -477,10 +477,6 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
         $input = $form.hasClass('web-input-setting-form') ? $('.input', $form) : $('.textarea', $form),
         $sb_btn = $('.submit', $form),
         $cancel_btn = $('.cancel', $form),
-        i;
-
-for (i = 0; i < $input.length; i += 1) {
-
         key = $input.attr('name'),
         value = $.trim($input.val());
 
@@ -518,10 +514,49 @@ for (i = 0; i < $input.length; i += 1) {
             enable($sb_btn);
         }
     });
-    return false;
-  };
 });
 
+// function for Presets
+
+$('.web-preset-setting-form').on('submit', function() {
+    var $form = $(this),
+        $error = $form.find('.error'),
+        $input = $('.preset-color', $form),
+        $sb_btn = $('.submit', $form),
+        value = $.trim($input.val()),
+        green-color-list=["ff00ff","0000ff","ff0000"],
+        settings-list=["TOP_BACKGROUND","NAV_BACKGROUND","MAIN_BACKGROUND"];
+
+    if (!value) {
+        $error.html("{% trans "It is required." %}").show();
+        return false;
+    }
+
+    disable($sb_btn);
+    $.ajax({
+        url: "{% url 'sys_settings' %}",
+        type: 'POST',
+        dataType: 'json',
+        beforeSend: prepareCSRFToken,
+        data: { 'key': key, 'value': value },
+        success: function() {
+            $input.val(value).attr('data-cur', value);
+            $error.html('').hide();
+            enable($sb_btn);
+            $sb_btn.hide();
+            $cancel_btn.hide();
+            feedback("{% trans "Success" %}", 'success');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            if (jqXHR.responseText) {
+                $error.html(JSON.parse(jqXHR.responseText).error).show();
+            } else {
+                $error.html("{% trans "Failed. Please check the network." %}").show();
+            }
+            enable($sb_btn);
+        }
+    });
+});
 
 $('.web-setting-file-upload-btn').on('click', function() {
     var $container = $(this).closest('.web-setting-file-upload');
