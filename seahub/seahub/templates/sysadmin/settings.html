@@ -516,6 +516,53 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
     });
 });
 
+<<<<<<< HEAD
+=======
+// function for Presets
+
+$('.web-preset-setting-form').on('submit', function() {
+    var $form = $(this),
+        $error = $form.find('.error'),
+        $input = $('.preset-color', $form),
+        $sb_btn = $('.submit', $form),
+        value = $.trim($input.val());
+    var green_color_list=["ff00ff","0000ff","ff0000"];
+    var settings_list=["TOP_BACKGROUND","NAV_BACKGROUND","MAIN_BACKGROUND"];
+
+    if (!value) {
+        $error.html("{% trans "It is required." %}").show();
+        return false;
+    }
+
+    console.log(value);
+
+    disable($sb_btn);
+    $.ajax({
+        url: "{% url 'sys_settings' %}",
+        type: 'POST',
+        dataType: 'json',
+        beforeSend: prepareCSRFToken,
+        data: { 'key': key, 'value': value },
+        success: function() {
+            $input.val(value).attr('data-cur', value);
+            $error.html('').hide();
+            enable($sb_btn);
+            $sb_btn.hide();
+            $cancel_btn.hide();
+            feedback("{% trans "Success" %}", 'success');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            if (jqXHR.responseText) {
+                $error.html(JSON.parse(jqXHR.responseText).error).show();
+            } else {
+                $error.html("{% trans "Failed. Please check the network." %}").show();
+            }
+            enable($sb_btn);
+        }
+    });
+});
+
+>>>>>>> 3d19ae4776d678c97a3999c4f2ff648ff0a7febc
 $('.web-setting-file-upload-btn').on('click', function() {
     var $container = $(this).closest('.web-setting-file-upload');
     $('.web-setting-file-upload-input', $container).trigger('click');
