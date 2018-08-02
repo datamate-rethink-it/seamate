@@ -523,14 +523,16 @@ $('.web-preset-setting-form').on('submit', function() {
         $error = $form.find('.error'),
         $input = $('.preset-color', $form),
         $sb_btn = $('.submit', $form),
-        value = $.trim($input.val()),
-        green-color-list=["ff00ff","0000ff","ff0000"],
-        settings-list=["TOP_BACKGROUND","NAV_BACKGROUND","MAIN_BACKGROUND"];
+        value = $.trim($input.val());
+    var green-color-list=["ff00ff","0000ff","ff0000"];
+    var settings-list=["TOP_BACKGROUND","NAV_BACKGROUND","MAIN_BACKGROUND"];
 
     if (!value) {
         $error.html("{% trans "It is required." %}").show();
         return false;
     }
+
+    console.log(value);
 
     disable($sb_btn);
     $.ajax({
