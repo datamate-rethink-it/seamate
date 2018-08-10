@@ -525,10 +525,8 @@ $('.web-preset-setting-form').on('submit', function(){
       var keys = ["TOP_BACKGROUND", "NAV_BACKGROUND", "MAIN_BACKGROUND"];
 
       if (value==="green") {
-        var values = ["ff00ff", "ffff00", "00ff00"];
-
+        var values = ["3FA805", "026E3A", "22521F"];
         $.each(keys, function(i, item){
-
           $.ajax({
               url: "{% url 'sys_settings' %}",
               type: 'POST',
@@ -551,15 +549,35 @@ $('.web-preset-setting-form').on('submit', function(){
                   }
                   enable($sb_btn);
               }
-
           });
-
-
         });
-
-          console.log("the value is green");
       } else if (value==="blue") {
-          console.log("the value is blue");
+        var values = ["126FA8", "04266E", "161752"];
+        $.each(keys, function(i, item){
+          $.ajax({
+              url: "{% url 'sys_settings' %}",
+              type: 'POST',
+              dataType: 'json',
+              beforeSend: prepareCSRFToken,
+              data: { 'key': keys[i], 'value': values[i] },
+              success: function() {
+                  $input.val(value).attr('data-cur', value);
+                  $error.html('').hide();
+                  enable($sb_btn);
+                  $sb_btn.hide();
+                  $cancel_btn.hide();
+                  feedback("{% trans "Success" %}", 'success');
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.responseText) {
+                      $error.html(JSON.parse(jqXHR.responseText).error).show();
+                  } else {
+                      $error.html("{% trans "Failed. Please check the network." %}").show();
+                  }
+                  enable($sb_btn);
+              }
+          });
+        });
       } else {
           console.log("the value does not exist");
       }
