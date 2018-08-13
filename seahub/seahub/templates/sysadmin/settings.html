@@ -533,22 +533,6 @@ $('.web-preset-setting-form').on('submit', function(){
               dataType: 'json',
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
-              success: function() {
-                  $input.val(value).attr('data-cur', value);
-                  $error.html('').hide();
-                  enable($sb_btn);
-                  $sb_btn.hide();
-                  $cancel_btn.hide();
-                  feedback("{% trans "Success" %}", 'success');
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.responseText) {
-                      $error.html(JSON.parse(jqXHR.responseText).error).show();
-                  } else {
-                      $error.html("{% trans "Failed. Please check the network." %}").show();
-                  }
-                  enable($sb_btn);
-              }
           });
         });
       } else if (value==="blue") {
@@ -560,27 +544,14 @@ $('.web-preset-setting-form').on('submit', function(){
               dataType: 'json',
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
-              success: function() {
-                  $input.val(value).attr('data-cur', value);
-                  $error.html('').hide();
-                  enable($sb_btn);
-                  $sb_btn.hide();
-                  $cancel_btn.hide();
-                  feedback("{% trans "Success" %}", 'success');
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.responseText) {
-                      $error.html(JSON.parse(jqXHR.responseText).error).show();
-                  } else {
-                      $error.html("{% trans "Failed. Please check the network." %}").show();
-                  }
-                  enable($sb_btn);
-              }
           });
         });
       } else {
           console.log("the value does not exist");
-      }
+      };
+      setTimeout(function(){// wait for 5 secs(2)
+          location.reload(); // then reload the page.(3)
+      }, 5000);
 });
 
 
