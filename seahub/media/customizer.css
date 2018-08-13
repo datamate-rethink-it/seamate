@@ -214,7 +214,7 @@ button.sf-dropdown-toggle:focus{
 .cur-view-path {
     background: transparent;
 }
-.cur-view-path h3{
+.cur-view-path h3, #my-repos > div > div.cur-view-path > h3{
   color: var(--main-text);
 }
 .empty-tips{
