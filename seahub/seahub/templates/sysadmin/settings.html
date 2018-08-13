@@ -523,10 +523,32 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
 $('.web-preset-setting-form').on('submit', function(){
   var $form = $(this),
       value = document.getElementById("preset-option").value;
-      var keys = ["TOP_BACKGROUND", "NAV_BACKGROUND", "MAIN_BACKGROUND"];
+      var keys = ["GLOBAL-FONT", "GLOBAL-BORDER-THICKNESS", "GLOBAL-BORDER-COLOR",
+              "GLOBAL-BORDER-RADIUS", "LOGIN-BACKGROUND", "LOGIN-TEXT",
+              "LOGIN-LINK", "LOGIN-LINK-HOVER", "LOGIN-ICBU",
+              "LOGIN-ICBU-HOVER", "TOP-BACKGROUND", "TOP-TEXT",
+              "TOP-LINK", "TOP-LINK-HOVER", "TOP-ICBU",
+              "TOP-ICBU-HOVER", "NAV-BACKGROUND", "NAV-TEXT",
+              "NAV-LINK", "NAV-LINK-HOVER", "NAV-ICBU",
+              "NAV-ICBU-HOVER", "MAIN-BACKGROUND", "MAIN-TEXT",
+              "MAIN-LINK", "MAIN-LINK-HOVER", "MAIN-ICBU",
+              "MAIN-ICBU-HOVER", "MAIN-TABLE-BORDER-COLOR", "MAIN-TABLE-BORDER-THICKNESS",
+              "POPUPS-BACKGROUND", "POPUPS-TEXT", "POPUPS-LINK",
+              "POPUPS-LINK-HOVER", "POPUPS-ICBU", "POPUPS-ICBU-HOVER"];
 
-      if (value==="green") {
-        var values = ["3FA805", "026E3A", "22521F"];
+      if (value==="electricviolet") {
+        var values = ["Rubik", "3", "B0A8B9",
+                      "5", "282E30", "E6E6E6",
+                      "0187FF", "7CE2FF", "222729",
+                      "1A1A1A", "7F1DCC", "FCEAFF",
+                      "FCEAFF", "FF0077", "382B47",
+                      "FCEAFF", "382B47", "FCEAFF",
+                      "FCEAFF", "FF0077", "FCEAFF",
+                      "FCEAFF", "1F1926", "FCEAFF",
+                      "FF0077", "FCEAFF", "FF0077",
+                      "FCEAFF", "382B47", "2",
+                      "7F1DCC", "FCEAFF", "FF0077",
+                      "FCEAFF", "FCEAFF", "FF0077"];
         $.each(keys, function(i, item){
           $.ajax({
               url: "{% url 'sys_settings' %}",
