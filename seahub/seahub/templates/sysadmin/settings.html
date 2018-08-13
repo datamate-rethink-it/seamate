@@ -535,6 +535,9 @@ $('.web-preset-setting-form').on('submit', function(){
               data: { 'key': keys[i], 'value': values[i] },
           });
         });
+        setTimeout(function(){// wait for 5 secs(2)
+            location.reload(); // then reload the page.(3)
+        }, 5000);
       } else if (value==="blue") {
         var values = ["126FA8", "04266E", "161752"];
         $.each(keys, function(i, item){
@@ -546,12 +549,13 @@ $('.web-preset-setting-form').on('submit', function(){
               data: { 'key': keys[i], 'value': values[i] },
           });
         });
+        setTimeout(function(){// wait for 5 secs(2)
+            location.reload(); // then reload the page.(3)
+        }, 5000);
       } else {
           console.log("the value does not exist");
       };
-      setTimeout(function(){// wait for 5 secs(2)
-          location.reload(); // then reload the page.(3)
-      }, 5000);
+
 });
 
 
