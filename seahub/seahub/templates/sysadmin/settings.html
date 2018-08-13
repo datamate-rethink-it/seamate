@@ -52,6 +52,7 @@
     <div class="panel">
 
       {% with type="input_presets" setting_display_name="Color Preset" %}
+          {% trans "If the reload doesnt show new colors, reload the site manually. Cache is evil." as help_tip %}
           {% include "snippets/web_settings_form.html" %}
       {% endwith %}
 
@@ -535,9 +536,7 @@ $('.web-preset-setting-form').on('submit', function(){
               data: { 'key': keys[i], 'value': values[i] },
           });
         });
-        setTimeout(function(){// wait for 5 secs(2)
-            location.reload(); // then reload the page.(3)
-        }, 5000);
+        window.location.reload(true);
       } else if (value==="blue") {
         var values = ["126FA8", "04266E", "161752"];
         $.each(keys, function(i, item){
@@ -549,9 +548,8 @@ $('.web-preset-setting-form').on('submit', function(){
               data: { 'key': keys[i], 'value': values[i] },
           });
         });
-        setTimeout(function(){// wait for 5 secs(2)
-            location.reload(); // then reload the page.(3)
-        }, 5000);
+        window.location.reload(true);
+
       } else {
           console.log("the value does not exist");
       };
