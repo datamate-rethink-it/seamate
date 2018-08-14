@@ -523,32 +523,9 @@ $('.web-input-setting-form, .web-textarea-setting-form').on('submit', function()
 $('.web-preset-setting-form').on('submit', function(){
   var $form = $(this),
       value = document.getElementById("preset-option").value;
-      var keys = ["GLOBAL-FONT", "GLOBAL-BORDER-THICKNESS", "GLOBAL-BORDER-COLOR",
-              "GLOBAL-BORDER-RADIUS", "LOGIN-BACKGROUND", "LOGIN-TEXT",
-              "LOGIN-LINK", "LOGIN-LINK-HOVER", "LOGIN-ICBU",
-              "LOGIN-ICBU-HOVER", "TOP-BACKGROUND", "TOP-TEXT",
-              "TOP-LINK", "TOP-LINK-HOVER", "TOP-ICBU",
-              "TOP-ICBU-HOVER", "NAV-BACKGROUND", "NAV-TEXT",
-              "NAV-LINK", "NAV-LINK-HOVER", "NAV-ICBU",
-              "NAV-ICBU-HOVER", "MAIN-BACKGROUND", "MAIN-TEXT",
-              "MAIN-LINK", "MAIN-LINK-HOVER", "MAIN-ICBU",
-              "MAIN-ICBU-HOVER", "MAIN-TABLE-BORDER-COLOR", "MAIN-TABLE-BORDER-THICKNESS",
-              "POPUPS-BACKGROUND", "POPUPS-TEXT", "POPUPS-LINK",
-              "POPUPS-LINK-HOVER", "POPUPS-ICBU", "POPUPS-ICBU-HOVER"];
-
-      if (value==="electricviolet") {
-        var values = ["Rubik", "3", "B0A8B9",
-                      "5", "282E30", "E6E6E6",
-                      "0187FF", "7CE2FF", "222729",
-                      "1A1A1A", "7F1DCC", "FCEAFF",
-                      "FCEAFF", "FF0077", "382B47",
-                      "FCEAFF", "382B47", "FCEAFF",
-                      "FCEAFF", "FF0077", "FCEAFF",
-                      "FCEAFF", "1F1926", "FCEAFF",
-                      "FF0077", "FCEAFF", "FF0077",
-                      "FCEAFF", "382B47", "2",
-                      "7F1DCC", "FCEAFF", "FF0077",
-                      "FCEAFF", "FCEAFF", "FF0077"];
+      var keys = ["GLOBAL_FONT", "GLOBAL_BORDER_THICKNESS", "GLOBAL_BORDER_COLOR", "GLOBAL_BORDER_RADIUS", "LOGIN_BACKGROUND", "LOGIN_TEXT", "LOGIN_LINK", "LOGIN_LINK_HOVER", "LOGIN_ICBU", "LOGIN_ICBU_HOVER", "TOP_BACKGROUND", "TOP_TEXT", "TOP_LINK", "TOP_LINK_HOVER", "TOP_ICBU", "TOP_ICBU_HOVER", "NAV_BACKGROUND", "NAV_TEXT", "NAV_LINK", "NAV_LINK_HOVER", "NAV_ICBU", "NAV_ICBU_HOVER", "MAIN_BACKGROUND", "MAIN_TEXT", "MAIN_LINK", "MAIN_LINK_HOVER", "MAIN_ICBU", "MAIN_ICBU_HOVER", "MAIN_TABLE_BORDER_COLOR", "MAIN_TABLE_BORDER_THICKNESS", "POPUPS_BACKGROUND", "POPUPS_TEXT", "POPUPS_LINK", "POPUPS_LINK_HOVER", "POPUPS_ICBU", "POPUPS_ICBU_HOVER"];
+      if (value=="electricviolet") {
+        var values = ["Rubik", "3", "B0A8B9", "5", "282E30", "E6E6E6", "0187FF", "7CE2FF", "222729", "1A1A1A", "7F1DCC", "FCEAFF", "FCEAFF", "FF0077", "382B47", "FCEAFF", "382B47", "FCEAFF", "FCEAFF", "FF0077", "FCEAFF", "FCEAFF", "1F1926", "FCEAFF", "FF0077", "FCEAFF", "FF0077", "FCEAFF", "382B47", "2", "7F1DCC", "FCEAFF", "FF0077", "FCEAFF", "FCEAFF", "FF0077"];
         $.each(keys, function(i, item){
           $.ajax({
               url: "{% url 'sys_settings' %}",
@@ -556,11 +533,12 @@ $('.web-preset-setting-form').on('submit', function(){
               dataType: 'json',
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
+              success: function(){},
           });
         });
         window.location.reload(true);
-      } else if (value==="blue") {
-        var values = ["126FA8", "04266E", "161752"];
+      } else if (value==="appleblossom") {
+        var values = ["Rubik", "3", "B0A8B9", "5", "282E30", "E6E6E6", "0187FF", "7CE2FF", "222729", "1A1A1A", "7F1DCC", "FCEAFF", "FCEAFF", "FF0077", "382B47", "FCEAFF", "382B47", "FCEAFF", "FCEAFF", "FF0077", "FCEAFF", "FCEAFF", "1F1926", "FCEAFF", "FF0077", "FCEAFF", "FF0077", "FCEAFF", "382B47", "2", "7F1DCC", "FCEAFF", "FF0077", "FCEAFF", "FCEAFF", "FF0077"];
         $.each(keys, function(i, item){
           $.ajax({
               url: "{% url 'sys_settings' %}",
@@ -568,10 +546,12 @@ $('.web-preset-setting-form').on('submit', function(){
               dataType: 'json',
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
+              success: function(){},
           });
         });
         window.location.reload(true);
-
+      } else if (value=="green") {
+          console.log("HERE COMES GREEN")
       } else {
           console.log("the value does not exist");
       };
