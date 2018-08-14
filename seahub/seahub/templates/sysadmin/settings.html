@@ -536,9 +536,9 @@ $('.web-preset-setting-form').on('submit', function(){
               success: function(){},
               error: function(jqXHR, textStatus, errorThrown) {
                   if (jqXHR.responseText) {
-                      $error.html(JSON.parse(jqXHR.responseText).error).show();
+                    console.log(JSON.parse(jqXHR.responseText).error);
                   } else {
-                      $error.html("{% trans "Failed. Please check the network." %}").show();
+                      console.log(JSON.parse(jqXHR.responseText).error);
                   }
                   enable($sb_btn);
               }
@@ -559,9 +559,9 @@ $('.web-preset-setting-form').on('submit', function(){
               success: function(){},
               error: function(jqXHR, textStatus, errorThrown) {
                   if (jqXHR.responseText) {
-                      $error.html(JSON.parse(jqXHR.responseText).error).show();
+                      console.log(JSON.parse(jqXHR.responseText).error);
                   } else {
-                      $error.html("{% trans "Failed. Please check the network." %}").show();
+                      console.log(JSON.parse(jqXHR.responseText).error);
                   }
                   enable($sb_btn);
               }
