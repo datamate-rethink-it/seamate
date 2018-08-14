@@ -534,6 +534,14 @@ $('.web-preset-setting-form').on('submit', function(){
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
               success: function(){},
+              error: function(jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.responseText) {
+                      $error.html(JSON.parse(jqXHR.responseText).error).show();
+                  } else {
+                      $error.html("{% trans "Failed. Please check the network." %}").show();
+                  }
+                  enable($sb_btn);
+              }
           });
           console.log(keys[i]);
           console.log(values[i]);
@@ -549,6 +557,14 @@ $('.web-preset-setting-form').on('submit', function(){
               beforeSend: prepareCSRFToken,
               data: { 'key': keys[i], 'value': values[i] },
               success: function(){},
+              error: function(jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.responseText) {
+                      $error.html(JSON.parse(jqXHR.responseText).error).show();
+                  } else {
+                      $error.html("{% trans "Failed. Please check the network." %}").show();
+                  }
+                  enable($sb_btn);
+              }
           });
           console.log(keys[i]);
           console.log(values[i]);
