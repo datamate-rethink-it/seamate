@@ -563,7 +563,6 @@ $('.web-input-color-setting-form').on('change', function(){
           success: function() {
               $error.html('').hide();
               feedback("{% trans "Success" %}", 'success');
-              location.reload(true);
           },
           error: function(jqXHR, textStatus, errorThrown) {
               if (jqXHR.responseText) {
