@@ -32,6 +32,7 @@
 {% if type == 'input_presets' %}
 <form class="web-setting-form web-preset-setting-form" action="">
     <h5 class="web-setting-name">{{ setting_display_name }}</h5>
+    <p class="error hide"></p>
     <div class="web-setting-input">
         <select id="preset-option" class="preset-color">
           <option selected="selected">Choose a Color Preset</option>
@@ -40,7 +41,6 @@
           </optgroup>
           <optgroup label="Light Styles">
           <option value="appleblossom">Apple Blossom</option>
-          <option value="blue">Blue</option>
           </optgroup>
         </select>
 
@@ -48,7 +48,7 @@
     <div class="web-setting-ops">
         <button type="submit" title="{% trans "Submit" %}">{% trans "Submit" %}</button>
     </div>
-    <p class="tip">{{ help_tip }}</p>
+    <p style="margin-top:10px;" class="tip">{{ help_tip }}</p>
 </form>
 {% endif %}
 
