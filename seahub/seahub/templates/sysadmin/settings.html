@@ -550,6 +550,7 @@ $('.web-preset-setting-form').on('change', function(){
 $('.web-input-color-setting-form').on('change', function(){
   var $form = $(this),
       $error = $form.find('.error'),
+      $input = $form.hasClass('web-input-setting-form') ? $('.input', $form) : $('.textarea', $form),
       key = $input.attr('name'),
       value = $.trim($input.val());
 
