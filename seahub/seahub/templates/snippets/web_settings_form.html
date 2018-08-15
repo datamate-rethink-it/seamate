@@ -16,15 +16,12 @@
 {% endif %}
 
 {% if type == 'input_color' %}
-<form class="web-setting-form web-input-setting-form" action="">
+<form class="web-setting-form web-input-color-setting-form" action="">
     <h5 class="web-setting-name">{{ setting_display_name }}</h5>
     <div class="web-setting-input">
         <input class="input jscolor" type="text" name="{{ setting_name }}" value="{{ setting_val }}" data-cur="{{ setting_val }}" />
         <p class="error hide"></p>
         <p class="tip">{{ help_tip }}</p>
-    </div>
-    <div class="web-setting-ops">
-        <button type="submit" class="sf2-icon-tick tick-green" title="{% trans "Submit" %}"></button>
     </div>
 </form>
 {% endif %}
@@ -38,15 +35,14 @@
           <option selected="selected">Choose a Color Preset</option>
           <optgroup label="Dark Styles">
           <option value="electricviolet">Electric Violet</option>
+          <option value="ebonyclay">Ebony Clay by xface</option>
           </optgroup>
           <optgroup label="Light Styles">
           <option value="appleblossom">Apple Blossom</option>
+          <option value="greenleaf">Green Leaf</option>
+          <option value="seamatedefault">Seamate Default</option>
           </optgroup>
         </select>
-
-    </div>
-    <div class="web-setting-ops">
-        <button type="submit" title="{% trans "Submit" %}">{% trans "Submit" %}</button>
     </div>
     <p style="margin-top:10px;" class="tip">{{ help_tip }}</p>
 </form>

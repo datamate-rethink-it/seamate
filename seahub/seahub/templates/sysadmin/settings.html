@@ -547,6 +547,33 @@ $('.web-preset-setting-form').on('change', function(){
           }
       });
 });
+$('.web-input-color-setting-form').on('change', function(){
+  var $form = $(this),
+      $error = $form.find('.error'),
+      key = $input.attr('name'),
+      value = $.trim($input.val());
+
+      $.ajax({
+          url: "{% url 'sys_settings' %}",
+          type: 'POST',
+          dataType: 'json',
+          cache: false,
+          beforeSend: prepareCSRFToken,
+          data: { 'key': key, 'value': value },
+          success: function() {
+              $error.html('').hide();
+              feedback("{% trans "Success" %}", 'success');
+              location.reload(true);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              if (jqXHR.responseText) {
+                  $error.html(JSON.parse(jqXHR.responseText).error).show();
+              } else {
+                  $error.html("{% trans "Failed. Please check the network." %}").show();
+              }
+          }
+      });
+});
 
 
 $('.web-setting-file-upload-btn').on('click', function() {
