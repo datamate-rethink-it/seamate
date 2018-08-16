@@ -46,7 +46,7 @@
         {% include "snippets/web_settings_form.html" %}
     {% endwith %}
 
-    <h4>Seamate</h4>
+    <h4>Seamate - Interface color settings</h4>
 
     <button class="accordion">0 - Presets</button>
     <div class="panel">
@@ -59,7 +59,7 @@
     </div>
 
 
-    <button class="accordion">1 - Global settings</button>
+    <button class="accordion">1 - Global</button>
     <div class="panel">
 
       {% with type="input_font" setting_display_name="GLOBAL_FONT" setting_name="GLOBAL_FONT" setting_val=config_dict.GLOBAL_FONT %}
@@ -80,7 +80,7 @@
 
     </div>
 
-    <button class="accordion">2 - Login settings</button>
+    <button class="accordion">2 - Login screen</button>
     <div class="panel">
 
       {% with type="checkbox" setting_display_name="LOGIN_ENABLE" setting_name="LOGIN_ENABLE" setting_val=config_dict.LOGIN_ENABLE %}
@@ -113,7 +113,7 @@
 
     </div>
 
-    <button class="accordion">3 - Top bar settings</button>
+    <button class="accordion">3 - Top bar </button>
     <div class="panel">
 
       {% with type="input_color" setting_display_name="TOP_BACKGROUND" setting_name="TOP_BACKGROUND" setting_val=config_dict.TOP_BACKGROUND %}
@@ -150,7 +150,7 @@
 
     </div>
 
-    <button class="accordion">4 - Navigation sidebar settings</button>
+    <button class="accordion">4 - Navigation sidebar</button>
     <div class="panel">
 
       {% with type="input_color" setting_display_name="NAV_BACKGROUND" setting_name="NAV_BACKGROUND" setting_val=config_dict.NAV_BACKGROUND %}
@@ -179,7 +179,7 @@
 
     </div>
 
-    <button class="accordion">5 - Main settings</button>
+    <button class="accordion">5 - Main content area</button>
     <div class="panel">
 
       {% with type="input_color" setting_display_name="MAIN_BACKGROUND" setting_name="MAIN_BACKGROUND" setting_val=config_dict.MAIN_BACKGROUND %}
@@ -215,7 +215,7 @@
       {% endwith %}
 
     </div>
-    <button class="accordion">6 - Popup settings</button>
+    <button class="accordion">6 - Popups</button>
     <div class="panel">
 
       {% with type="input_color" setting_display_name="POPUPS_BACKGROUND" setting_name="POPUPS_BACKGROUND" setting_val=config_dict.POPUPS_BACKGROUND %}
@@ -244,7 +244,7 @@
 
 
     </div>
-    <button class="accordion">7 - Custom settings</button>
+    <button class="accordion">7 - Custom CSS</button>
     <div class="panel">
 
       {% with type="checkbox" setting_name="ENABLE_BRANDING_CSS" setting_val=config_dict.ENABLE_BRANDING_CSS %}
