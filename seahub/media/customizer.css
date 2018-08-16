@@ -545,8 +545,20 @@ a#edit-page.sf-btn-link.btn-white:hover, a#page-history.sf-btn-link.btn-white:ho
     transition: 0.4s;
 }
 #right-panel button.accordion, button.accordion:hover{
-  background: none;
+  background: #f0f0f0;
+  border-radius: 0px;
+  border-bottom: 1px dotted black;
+  padding: 10px;
+  color: #000;
 }
+#right-panel .panel{
+  background-color: #d4d4d4;
+  color: #000;
+}
+#right-panel .panel p.tip{
+  color: #000;
+}
+
 .active, .accordion:hover {
     background-color: #ccc;
 }
@@ -583,4 +595,7 @@ input:focus, button:focus, select:focus, textarea:focus {
   .nav-con-tabs-nav .ui-state-active a, .nav-con-tabs-nav .ui-state-active a:hover {
     background: none;
   }
+}
+.web-setting-name {
+    width: 220px;
 }
