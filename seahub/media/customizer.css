@@ -46,21 +46,21 @@ a#logo img{
   box-shadow: none;
 }
 .btn-white{
-  background: var(--top-icbu);
+  background: var(--top-button);
   color: var(--top-link);
 }
 .btn-white:hover{
-  background: var(--top-icbu-hover);
+  background: var(--top-button-hover);
   color: var(--top-link-hover);
 }
 #notifications .sf2-icon-bell, #my-info {
-  color: var(--top-icbu);
+  color: var(--top-icon);
 }
 #notifications .sf2-icon-bell:hover, #my-info:hover{
-  color: var(--top-icbu-hover);
+  color: var(--top-icon-hover);
 }
 button.sf-dropdown-toggle:focus{
-  background-color: var(--top-icbu-hover) !important;
+  background-color: var(--top-button-hover) !important;
 }
 .add{
   color: var(--top-link);
@@ -119,26 +119,26 @@ button.sf-dropdown-toggle:focus{
   border-bottom: 1px solid var(--top-text);
 }
 .sf-popover-close {
-    color: var(--top-icbu);
+    color: var(--top-icon);
 }
 .sf-popover-close:hover{
-  color: var(--top-icbu-hover);
+  color: var(--top-icon-hover);
 }
 .grid-view-icon-btn.active, .list-view-icon-btn.active {
-    color: var(--top-icbu);
+    color: var(--top-icon);
     background: var(--top-background);
 }
 .grid-view-icon-btn.active:hover, .list-view-icon-btn.active:hover {
-    color: var(--top-icbu);
+    color: var(--top-icon);
     background: var(--top-background);
 }
 .grid-view-icon-btn:hover, .list-view-icon-btn:hover {
-    color: var(--top-link-hover);
-    background: var(--top-icbu-hover);
+    color: var(--top-icon-hover);
+    background: var(--top-button-hover);
 }
 .grid-view-icon-btn, .list-view-icon-btn {
-    color: var(--top-link);
-    background: var(--top-icbu);
+    color: var(--top-icon);
+    background: var(--top-button);
 }
 .panel-top .menu-inner-divider {
     border-top: 1px solid var(--top-text);
@@ -362,12 +362,12 @@ button.sf-dropdown-toggle:focus{
 }
 #view-hd .sf-btn-group a, .file-view-op button {
   border-radius: var(--global-border-radius);
-  color: var(--top-link);
-  background-color: var(--top-icbu);
+  color: var(--top-icon);
+  background-color: var(--top-button);
 }
 #view-hd .sf-btn-group a:hover, .file-view-op button:hover {
-  color: var(--top-link-hover);
-  background-color: var(--top-icbu-hover);
+  color: var(--top-icon-hover);
+  background-color: var(--top-button-hover);
 }
 
 /** wiki ***/

@@ -132,11 +132,19 @@
           {% include "snippets/web_settings_form.html" %}
       {% endwith %}
 
-      {% with type="input_color" setting_display_name="TOP_ICBU" setting_name="TOP_ICBU" setting_val=config_dict.TOP_ICBU %}
+      {% with type="input_color" setting_display_name="TOP_ICON" setting_name="TOP_ICON" setting_val=config_dict.TOP_ICON %}
           {% include "snippets/web_settings_form.html" %}
       {% endwith %}
 
-      {% with type="input_color" setting_display_name="TOP_ICBU_HOVER" setting_name="TOP_ICBU_HOVER" setting_val=config_dict.TOP_ICBU_HOVER %}
+      {% with type="input_color" setting_display_name="TOP_ICON_HOVER" setting_name="TOP_ICON_HOVER" setting_val=config_dict.TOP_ICBU_HOVER %}
+          {% include "snippets/web_settings_form.html" %}
+      {% endwith %}
+
+      {% with type="input_color" setting_display_name="TOP_BUTTON" setting_name="TOP_BUTTON" setting_val=config_dict.TOP_BUTTON %}
+          {% include "snippets/web_settings_form.html" %}
+      {% endwith %}
+
+      {% with type="input_color" setting_display_name="TOP_BUTTON_HOVER" setting_name="TOP_BUTTON_HOVER" setting_val=config_dict.TOP_BUTTON_HOVER %}
           {% include "snippets/web_settings_form.html" %}
       {% endwith %}
 
