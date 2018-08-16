@@ -2117,11 +2117,11 @@ def sys_settings(request):
             elif key == 'PRESET':
                 key = ['GLOBAL_FONT', 'GLOBAL_BORDER_THICKNESS', 'GLOBAL_BORDER_COLOR', 'GLOBAL_BORDER_RADIUS', 'LOGIN_BACKGROUND', 'LOGIN_TEXT', 'LOGIN_LINK', 'LOGIN_LINK_HOVER', 'LOGIN_ICBU', 'LOGIN_ICBU_HOVER', 'TOP_BACKGROUND', 'TOP_TEXT', 'TOP_LINK', 'TOP_LINK_HOVER', 'TOP_ICON', 'TOP_ICON_HOVER', 'TOP_BUTTON', 'TOP_BUTTON_HOVER', 'NAV_BACKGROUND', 'NAV_TEXT', 'NAV_LINK', 'NAV_LINK_HOVER', 'NAV_ICBU', 'NAV_ICBU_HOVER', 'MAIN_BACKGROUND', 'MAIN_TEXT', 'MAIN_LINK', 'MAIN_LINK_HOVER', 'MAIN_ICBU', 'MAIN_ICBU_HOVER', 'MAIN_TABLE_BORDER_COLOR', 'MAIN_TABLE_BORDER_THICKNESS', 'POPUPS_BACKGROUND', 'POPUPS_TEXT', 'POPUPS_LINK', 'POPUPS_LINK_HOVER', 'POPUPS_ICBU', 'POPUPS_ICBU_HOVER']
                 if value == 'electricviolet':
-                    value = ['Rubik', '3', 'B0A8B9', '5', '282E30', 'E6E6E6', '0187FF', '7CE2FF', '222729', '1A1A1A', '7F1DCC', 'FCEAFF', 'FCEAFF', 'FF0077', '382B47', 'FCEAFF', '382B47', 'FCEAFF', 'FCEAFF', 'FF0077', 'FCEAFF', 'FCEAFF', '1F1926', 'FCEAFF', 'FF0077', 'FCEAFF', 'FF0077', 'FCEAFF', '382B47', '2', '7F1DCC', 'FCEAFF', 'FF0077', 'FCEAFF', 'FCEAFF', 'FF0077']
+                    value = ['Rubik', '3', 'B0A8B9', '5', '282E30', 'E6E6E6', '0187FF', '7CE2FF', '222729', '1A1A1A', '7F1DCC', 'FCEAFF', 'FCEAFF', 'FF0077', '382B47', 'FCEAFF', '382B47', 'FCEAFF', '382B47', 'FCEAFF', 'FCEAFF', 'FF0077', 'FCEAFF', 'FCEAFF', '1F1926', 'FCEAFF', 'FF0077', 'FCEAFF', 'FF0077', 'FCEAFF', '382B47', '2', '7F1DCC', 'FCEAFF', 'FF0077', 'FCEAFF', 'FCEAFF', 'FF0077']
                     for x, y in zip(key, value):
                         setattr(config, x, y)
                 elif value == 'appleblossom':
-                    value = ['Raleway', '2', '2DAB1D', '3', 'F5F5F5', '570F0F', 'C40404', 'C40404', 'F5F5F5', '1F1926', 'E82A2A', '292929', '292929', 'FFFFFF', 'F7E3E3', '292929', 'E8FAEB', '380E0B', '380E0B', 'A61111', '380E0B', '380E0B', 'F7F0F0', '380E0B', 'E82A2A', '121012', '121012', 'E82A2A', '382B47', '0', 'A61111', 'FCEAFF', 'BBDE00', 'FCEAFF', 'A61111', 'FF5C5C']
+                    value = ['Raleway', '2', '2DAB1D', '3', 'F5F5F5', '570F0F', 'C40404', 'C40404', 'F5F5F5', '1F1926', 'E82A2A', '292929', '292929', 'FFFFFF', 'F7E3E3', 'FCEAFF', '382B47', '292929', 'E8FAEB', '380E0B', '380E0B', 'A61111', '380E0B', '380E0B', 'F7F0F0', '380E0B', 'E82A2A', '121012', '121012', 'E82A2A', '382B47', '0', 'A61111', 'FCEAFF', 'BBDE00', 'FCEAFF', 'A61111', 'FF5C5C']
                     for x, y in zip(key, value):
                         setattr(config, x, y)
                 else:
