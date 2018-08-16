@@ -2124,6 +2124,18 @@ def sys_settings(request):
                     value = ['Raleway', '2', '2DAB1D', '3', 'F5F5F5', '570F0F', 'C40404', 'C40404', 'F5F5F5', '1F1926', 'E82A2A', '292929', 'FCFCFC', 'FFFFFF', 'F7E3E3', 'F7E3E3', 'FF6969', 'C22323', 'E8FAEB', '380E0B', '380E0B', 'A61111', '380E0B', '380E0B', 'F7F0F0', '380E0B', 'E82A2A', '121012', '121012', 'E82A2A', '382B47', '0', 'A61111', 'FCEAFF', 'BBDE00', 'FCEAFF', 'A61111', 'FF5C5C']
                     for x, y in zip(key, value):
                         setattr(config, x, y)
+                elif value == 'ebonyclay':
+                    value = ['Oxygen','3','18171A','5','18171A','ADADAD','4086d7','fea910','3A3940','3A3940','21262d','ABABAB','4086D7','FEA910','FEA910','E0950E','252B33','1A1E24','21262d','4086D7','CECECE','E0950E','FEA910','FEA910','1b1f23','ADADAD','4086D7','FEA910','ADADAD','FEA910','090c10','2','1B1F23','CECECE','4086D7','FEA910','252B33','1A1E24']
+                    for x, y in zip(key, value):
+                        setattr(config, x, y)
+                elif value == 'greenleaf':
+                    value = ['Lora','1','004D21','0','EBF2ED','292929','004D21','008A3B','EBF2ED','EBF2ED','ABD9AE','292929','008a3b','004D21','004D21','008A3B','EBF2ED','D9E0DB','FFFFFF','004D21','008A3B','004D21','004D21','004D21','FFFFFF','292929','008A3B','004D21','008A3B','004D21','E3E3E3','1','FFFFFF','292929','008A3B','004D21','EDEDED','EDEDED']
+                    for x, y in zip(key, value):
+                        setattr(config, x, y)
+                elif value == 'seamatedefault':
+                    value = ['Nunito','1','4B8B2A','5','31383B','D6D6D6','D6D6D6','F0F0F0','DDA62A','4B8B2A','333333','D6D6D6','D6D6D6','F0F0F0','DDA62A','4B8B2A','4B8B2A','DDA62A','333','D6D6D6','D6D6D6','4B8B2A','DDA62A','DDA62A','292929','D6D6D6','DDA62A','F0F0F0','7D5E18','4B8B2A','333','1','333','D6D6D6','008A3B','D6D6D6','EDEDED','EDEDED']
+                    for x, y in zip(key, value):
+                        setattr(config, x, y)
                 else:
                     result['error'] = _(u'Invalid value')
                     return HttpResponse(json.dumps(result), status=400, content_type=content_type)
