@@ -90,7 +90,7 @@ WEBPACK_LOADER = {
     }
 }
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # StaticI18N config
 STATICI18N_ROOT = '%s/static/scripts' % PROJECT_ROOT
@@ -130,6 +130,7 @@ MIDDLEWARE_CLASSES = (
 SITE_ROOT_URLCONF = 'seahub.urls'
 ROOT_URLCONF = 'seahub.utils.rooturl'
 SITE_ROOT = '/'
+CSRF_COOKIE_NAME = 'sfcsrftoken'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'seahub.wsgi.application'
@@ -263,6 +264,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ENABLE_OAUTH = False
+ENABLE_WATERMARK = False
+
+# allow user to clean library trash
+ENABLE_USER_CLEAN_TRASH = True
 
 LOGIN_REDIRECT_URL = '/profile/'
 LOGIN_URL = '/accounts/login/'
@@ -298,11 +303,21 @@ MAX_NUMBER_OF_FILES_FOR_FILEUPLOAD = 1000
 # enable encrypt library
 ENABLE_ENCRYPTED_LIBRARY = True
 
+# enable reset encrypt library's password when user forget password
+ENABLE_RESET_ENCRYPTED_REPO_PASSWORD = False
+
 # mininum length for password of encrypted library
 REPO_PASSWORD_MIN_LENGTH = 8
 
 # token length for the share link
 SHARE_LINK_TOKEN_LENGTH = 20
+
+# if limit only authenticated user can view preview share link
+SHARE_LINK_LOGIN_REQUIRED = False
+
+# min/max expire days for a share link
+SHARE_LINK_EXPIRE_DAYS_MIN = 0 # 0 means no limit
+SHARE_LINK_EXPIRE_DAYS_MAX = 0 # 0 means no limit
 
 # mininum length for the password of a share link
 SHARE_LINK_PASSWORD_MIN_LENGTH = 8
@@ -351,7 +366,6 @@ DISABLE_SYNC_WITH_ANY_FOLDER = False
 
 ENABLE_TERMS_AND_CONDITIONS = False
 
-
 # Enable or disable sharing to all groups
 ENABLE_SHARE_TO_ALL_GROUPS = False
 
@@ -366,7 +380,6 @@ ENABLE_FILE_COMMENT = True
 
 # File preview
 FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
-OFFICE_PREVIEW_MAX_SIZE = 2 * 1024 * 1024
 FILE_ENCODING_LIST = ['auto', 'utf-8', 'gbk', 'ISO-8859-1', 'ISO-8859-5']
 FILE_ENCODING_TRY_LIST = ['utf-8', 'gbk']
 HIGHLIGHT_KEYWORD = False # If True, highlight the keywords in the file when the visit is via clicking a link in 'search result' page.
@@ -532,7 +545,10 @@ LOGO_HEIGHT = 32
 CUSTOM_LOGO_PATH = 'custom/mylogo.png'
 CUSTOM_FAVICON_PATH = 'custom/favicon.ico'
 
-# Enable custom css to modify the seafile css
+# used before version 6.3: the relative path of css file under seahub-data (e.g. custom/custom.css)
+BRANDING_CSS = ''
+
+# used in 6.3+, enable setting custom css via admin web interface
 ENABLE_BRANDING_CSS = False
 
 # Using Django to server static file. Set to `False` if deployed behide a web
@@ -622,9 +638,10 @@ SESSION_COOKIE_AGE = 24 * 60 * 60
 # Days of remembered login info (deafult: 7 days)
 LOGIN_REMEMBER_DAYS = 7
 
-SEAFILE_VERSION = '6.2.0'
+SEAFILE_VERSION = '6.3.3'
 
 # Compress static files(css, js)
+COMPRESS_ENABLED = False
 COMPRESS_URL = MEDIA_URL
 COMPRESS_ROOT = MEDIA_ROOT
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
@@ -685,10 +702,12 @@ ENABLE_FOLDER_PERM = False
 ENABLE_GUEST_INVITATION = False
 INVITATION_ACCEPTER_BLACKLIST = []
 
-#####################
-# Sudo Mode #
-#####################
+########################
+# Security Enhancements #
+########################
+
 ENABLE_SUDO_MODE = True
+FILESERVER_TOKEN_ONCE_ONLY = True
 
 #################
 # Email sending #
@@ -702,6 +721,12 @@ SEND_EMAIL_ON_RESETTING_USER_PASSWD = True # Whether to send email when a system
 ##########################
 
 ENABLE_SUB_LIBRARY = True
+
+##########################
+# Settings for frontend  #
+##########################
+
+SEAFILE_COLLAB_SERVER = ''
 
 ############################
 # Settings for Seahub Priv #
@@ -875,6 +900,7 @@ CONSTANCE_CONFIG = {
     'CUSTOM_CSS': ('', ''),
 
     'ENABLE_TERMS_AND_CONDITIONS': (ENABLE_TERMS_AND_CONDITIONS, ''),
+    'ENABLE_USER_CLEAN_TRASH': (ENABLE_USER_CLEAN_TRASH, ''),
 }
 
-SEAFILE_VERSION = "6.3.0"
+SEAFILE_VERSION = "6.3.7"

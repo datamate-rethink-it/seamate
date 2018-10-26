@@ -25,7 +25,7 @@ from django.utils.http import urlquote
 import seaserv
 from seaserv import ccnet_threaded_rpc, seafserv_threaded_rpc, \
     seafile_api, get_group, get_group_members, ccnet_api, \
-    get_related_users_by_repo, get_related_users_by_org_repo
+    get_related_users_by_org_repo
 from pysearpc import SearpcError
 
 from seahub.base.accounts import User
@@ -46,10 +46,10 @@ from seahub.role_permissions.utils import get_available_roles, \
 from seahub.role_permissions.models import AdminRole
 from seahub.two_factor.models import default_device
 from seahub.utils import IS_EMAIL_CONFIGURED, string2list, is_valid_username, \
-    is_pro_version, send_html_email, get_user_traffic_list, get_server_id, \
-    handle_virus_record, get_virus_record_by_id, \
+    is_pro_version, send_html_email, \
+    get_server_id, handle_virus_record, get_virus_record_by_id, \
     get_virus_record, FILE_AUDIT_ENABLED, get_max_upload_file_size, \
-    get_site_name
+    get_site_name, seafevents_api
 from seahub.utils.ip import get_remote_ip
 from seahub.utils.file_size import get_file_size_unit
 from seahub.utils.ldap import get_ldap_info
@@ -61,6 +61,7 @@ from seahub.utils.ms_excel import write_xls
 from seahub.utils.user_permissions import get_basic_user_roles, \
         get_user_role, get_basic_admin_roles
 from seahub.utils.auth import get_login_bg_image_path
+from seahub.utils.repo import get_related_users_by_repo, get_repo_owner
 from seahub.views import get_system_default_repo_id
 from seahub.forms import SetUserQuotaForm, AddUserForm, BatchAddUserForm, \
     TermsAndConditionsForm
@@ -97,6 +98,12 @@ def sysadmin(request):
 
     folder_perm_enabled = True if is_pro_version() and settings.ENABLE_FOLDER_PERM else False
 
+    try:
+        expire_days = seafile_api.get_server_config_int('library_trash', 'expire_days')
+    except Exception as e:
+        logger.error(e)
+        expire_days = -1
+
     return render(request, 'sysadmin/sysadmin_backbone.html', {
             'enable_sys_admin_view_repo': ENABLE_SYS_ADMIN_VIEW_REPO,
             'enable_upload_folder': settings.ENABLE_UPLOAD_FOLDER,
@@ -112,6 +119,7 @@ def sysadmin(request):
             'is_pro': True if is_pro_version() else False,
             'file_audit_enabled': FILE_AUDIT_ENABLED,
             'enable_limit_ipaddress': ENABLE_LIMIT_IPADDRESS,
+            'trash_repos_expire_days': expire_days if expire_days > 0 else 30,
             })
 
 @login_required
@@ -134,6 +142,64 @@ def sys_statistic_user(request):
 
     return render(request, 'sysadmin/sys_statistic_user.html', {
             })
+
+@login_required
+@sys_staff_required
+def sys_statistic_traffic(request):
+    req_type = request.GET.get('type', None)
+    if not req_type:
+        return render(request, 'sysadmin/sys_statistic_traffic.html', {})
+
+    try:
+        current_page = int(request.GET.get('page', '1'))
+        per_page = int(request.GET.get('per_page', '100'))
+    except ValueError:
+        current_page = 1
+        per_page = 100
+
+    month = request.GET.get('month', timezone.now().strftime('%Y%m'))
+    try:
+        month_dt = datetime.datetime.strptime(month, '%Y%m')
+    except ValueError:
+        month_dt = timezone.now()
+
+    start = per_page * (current_page - 1)
+    limit = per_page + 1
+
+    order_by = request.GET.get('order_by', '')
+    filters = [
+        'user', 'org_id',
+        'sync_file_upload', 'sync_file_download',
+        'web_file_upload', 'web_file_download',
+        'link_file_upload', 'link_file_download',
+    ]
+    if order_by not in filters and \
+       order_by not in map(lambda x: x + '_desc', filters):
+        order_by = 'link_file_download_desc'
+
+    if req_type == 'user':
+        traffic_info_list = seafevents_api.get_all_users_traffic_by_month(
+            month_dt, start, limit, order_by)
+    else:
+        traffic_info_list = seafevents_api.get_all_orgs_traffic_by_month(
+            month_dt, start, limit, order_by)
+        for e in traffic_info_list:
+            e['org_name'] = ccnet_api.get_org_by_id(e['org_id']).org_name
+
+    page_next = len(traffic_info_list) == limit
+
+    return render(request,
+        'sysadmin/sys_trafficadmin.html', {
+            'type': req_type,
+            'order_by': order_by,
+            'traffic_info_list': traffic_info_list[:per_page],
+            'month': month,
+            'current_page': current_page,
+            'prev_page': current_page-1,
+            'next_page': current_page+1,
+            'per_page': per_page,
+            'page_next': page_next,
+        })
 
 def can_view_sys_admin_repo(repo):
     default_repo_id = get_system_default_repo_id()
@@ -1418,6 +1484,9 @@ def sys_org_info_user(request, org_id):
 
     org_id = int(org_id)
 
+    if not ccnet_api.get_org_by_id(org_id):
+        raise Http404
+
     org_basic_info = sys_get_org_base_info(org_id)
     users = org_basic_info["users"]
     last_logins = UserLastLogin.objects.filter(username__in=[x.email for x in users])
@@ -1447,6 +1516,10 @@ def sys_org_info_user(request, org_id):
 def sys_org_info_group(request, org_id):
 
     org_id = int(org_id)
+
+    if not ccnet_api.get_org_by_id(org_id):
+        raise Http404
+
     org_basic_info = sys_get_org_base_info(org_id)
 
     return render(request, 'sysadmin/sys_org_info_group.html',
@@ -1457,6 +1530,10 @@ def sys_org_info_group(request, org_id):
 def sys_org_info_library(request, org_id):
 
     org_id = int(org_id)
+
+    if not ccnet_api.get_org_by_id(org_id):
+        raise Http404
+
     org_basic_info = sys_get_org_base_info(org_id)
 
     # library
@@ -1474,9 +1551,27 @@ def sys_org_info_library(request, org_id):
 
 @login_required
 @sys_staff_required
+def sys_org_info_traffic(request, org_id):
+
+    org_id = int(org_id)
+
+    if not ccnet_api.get_org_by_id(org_id):
+        raise Http404
+
+    org_basic_info = sys_get_org_base_info(org_id)
+
+    return render(request, 'sysadmin/sys_org_info_traffic.html',
+           org_basic_info)
+
+@login_required
+@sys_staff_required
 def sys_org_info_setting(request, org_id):
 
     org_id = int(org_id)
+
+    if not ccnet_api.get_org_by_id(org_id):
+        raise Http404
+
     org_basic_info = sys_get_org_base_info(org_id)
 
     if getattr(settings, 'ORG_MEMBER_QUOTA_ENABLED', False):
@@ -1726,14 +1821,15 @@ def sys_repo_delete(request, repo_id):
     else:
         repo_name = ''
 
-    if MULTI_TENANCY:
-        org_id = seafserv_threaded_rpc.get_org_id_by_repo_id(repo_id)
-        usernames = get_related_users_by_org_repo(org_id, repo_id)
-        repo_owner = seafile_api.get_org_repo_owner(repo_id)
-    else:
+    repo_owner = get_repo_owner(request, repo_id)
+    try:
+        org_id = seafile_api.get_org_id_by_repo_id(repo_id)
+        usernames = get_related_users_by_repo(repo_id,
+                org_id if org_id > 0 else None)
+    except Exception as e:
+        logger.error(e)
         org_id = -1
-        usernames = get_related_users_by_repo(repo_id)
-        repo_owner = seafile_api.get_repo_owner(repo_id)
+        usernames = []
 
     seafile_api.remove_repo(repo_id)
     repo_deleted.send(sender=None, org_id=org_id, usernames=usernames,
@@ -1742,42 +1838,6 @@ def sys_repo_delete(request, repo_id):
 
     messages.success(request, _(u'Successfully deleted.'))
     return HttpResponseRedirect(next)
-
-@login_required
-@sys_staff_required
-def sys_traffic_admin(request):
-    """List all users from database.
-    """
-    try:
-        current_page = int(request.GET.get('page', '1'))
-        per_page = int(request.GET.get('per_page', '25'))
-    except ValueError:
-        current_page = 1
-        per_page = 25
-
-    month = request.GET.get('month', '')
-    if not re.match(r'[\d]{6}', month):
-        month = datetime.datetime.now().strftime('%Y%m')
-
-    start = per_page * (current_page -1)
-    limit = per_page + 1
-    traffic_info_list = get_user_traffic_list(month, start, limit)
-
-    page_next = len(traffic_info_list) == limit
-
-    for info in traffic_info_list:
-        info['total'] = info['file_view'] + info['file_download'] + info['dir_download']
-
-    return render(request,
-        'sysadmin/sys_trafficadmin.html', {
-            'traffic_info_list': traffic_info_list,
-            'month': month,
-            'current_page': current_page,
-            'prev_page': current_page-1,
-            'next_page': current_page+1,
-            'per_page': per_page,
-            'page_next': page_next,
-        })
 
 @login_required
 @sys_staff_required
@@ -1885,16 +1945,14 @@ def batch_add_user_example(request):
         next = SITE_ROOT
     data_list = []
     head = [_('Email'), _('Password'), _('Name')+ '(' + _('Optional') + ')',
-            _('Department')+ '(' + _('Optional') + ')', _('Role')+
-            '(' + _('Optional') + ')', _('Space Quota') + '(MB, ' + _('Optional') + ')']
+            _('Role') + '(' + _('Optional') + ')', _('Space Quota') + '(MB, ' + _('Optional') + ')']
     for i in xrange(5):
         username = "test" + str(i) +"@example.com"
         password = "123456"
         name = "test" + str(i)
-        department = "department" + str(i)
         role = "default"
         quota = "1000"
-        data_list.append([username, password, name, department, role, quota])
+        data_list.append([username, password, name, role, quota])
 
     wb = write_xls('sample', head, data_list)
     if not wb:
@@ -1970,21 +2028,14 @@ def batch_add_user(request):
                     logger.error(e)
 
                 try:
-                    department = row[3].strip()
-                    if len(department) <= 512:
-                        DetailedProfile.objects.add_or_update(username, department, '')
-                except Exception as e:
-                    logger.error(e)
-
-                try:
-                    role = row[4].strip()
+                    role = row[3].strip()
                     if is_pro_version() and role in get_available_roles():
                         User.objects.update_role(username, role)
                 except Exception as e:
                     logger.error(e)
 
                 try:
-                    space_quota_mb = int(row[5])
+                    space_quota_mb = int(row[4])
                     if space_quota_mb >= 0:
                         space_quota = int(space_quota_mb) * get_file_size_unit('MB')
                         seafile_api.set_user_quota(username, space_quota)

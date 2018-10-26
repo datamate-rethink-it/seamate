@@ -16,7 +16,7 @@ from django.utils.functional import lazy
 from constance import config
 
 from seahub.settings import SEAFILE_VERSION, SITE_TITLE, SITE_NAME, \
-    MAX_FILE_NAME, LOGO_PATH, LOGO_WIDTH, LOGO_HEIGHT, \
+    MAX_FILE_NAME, LOGO_PATH, BRANDING_CSS, LOGO_WIDTH, LOGO_HEIGHT,\
     SHOW_REPO_DOWNLOAD_BUTTON, SITE_ROOT, ENABLE_GUEST_INVITATION, \
     FAVICON_PATH, ENABLE_THUMBNAIL, THUMBNAIL_SIZE_FOR_ORIGINAL, \
     MEDIA_ROOT, SHOW_LOGOUT_ICON, CUSTOM_LOGO_PATH, CUSTOM_FAVICON_PATH, \
@@ -33,15 +33,12 @@ from seahub.settings import SEAFILE_VERSION, SITE_TITLE, SITE_NAME, \
 from seahub.constants import DEFAULT_ADMIN
 from seahub.utils import get_site_name
 
-
-
 try:
     from seahub.settings import SEACLOUD_MODE
 except ImportError:
     SEACLOUD_MODE = False
 
-from seahub.utils import HAS_FILE_SEARCH, EVENTS_ENABLED, \
-        TRAFFIC_STATS_ENABLED, is_pro_version
+from seahub.utils import HAS_FILE_SEARCH, EVENTS_ENABLED, is_pro_version
 
 try:
     from seahub.settings import ENABLE_PUBFILE
@@ -56,9 +53,6 @@ try:
     from seahub.settings import MULTI_TENANCY
 except ImportError:
     MULTI_TENANCY = False
-
-
-
 
 def base(request):
     """
@@ -98,6 +92,7 @@ def base(request):
     result = {
         'seafile_version': SEAFILE_VERSION,
         'site_title': config.SITE_TITLE,
+        'branding_css': BRANDING_CSS,
         'enable_branding_css': config.ENABLE_BRANDING_CSS,
         'GLOBAL_FONT': re.sub('[^A-Za-z]+', '', config.GLOBAL_FONT),
         'GLOBAL_BORDER_THICKNESS': config.GLOBAL_BORDER_THICKNESS,
@@ -152,14 +147,15 @@ def base(request):
         'share_link_password_min_length': config.SHARE_LINK_PASSWORD_MIN_LENGTH,
         'repo_password_min_length': config.REPO_PASSWORD_MIN_LENGTH,
         'events_enabled': EVENTS_ENABLED,
-        'traffic_stats_enabled': TRAFFIC_STATS_ENABLED,
         'sysadmin_extra_enabled': ENABLE_SYSADMIN_EXTRA,
         'multi_tenancy': MULTI_TENANCY,
         'multi_institution': getattr(dj_settings, 'MULTI_INSTITUTION', False),
         'search_repo_id': search_repo_id,
         'SITE_ROOT': SITE_ROOT,
+        'CSRF_COOKIE_NAME': dj_settings.CSRF_COOKIE_NAME,
         'constance_enabled': dj_settings.CONSTANCE_ENABLED,
         'FILE_SERVER_ROOT': file_server_root,
+        'LOGIN_URL': dj_settings.LOGIN_URL,
         'enable_thumbnail': ENABLE_THUMBNAIL,
         'thumbnail_size_for_original': THUMBNAIL_SIZE_FOR_ORIGINAL,
         'enable_guest_invitation': ENABLE_GUEST_INVITATION,
