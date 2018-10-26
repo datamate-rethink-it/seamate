@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}"/>
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/jstree_default_theme/style.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static "css/magnific-popup.css" %}" />
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/seahub.min.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/seahub.min.css?t=1539583528" />
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}customizer.css" />
 <style>
 @import url('https://fonts.googleapis.com/css?family={{ GLOBAL_FONT }}:400,700');
@@ -58,9 +58,8 @@
 }
 </style>
 {% block extra_style %}{% endblock %}
-{% if enable_branding_css %}<link rel="stylesheet" type="text/css" href="{% url 'custom_css' %}" />
-{% endif %}
-
+{% if branding_css != '' %}<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}{{ branding_css }}" />{% endif %}
+{% if enable_branding_css %}<link rel="stylesheet" type="text/css" href="{% url 'custom_css' %}" />{% endif %}
 </head>
 
 <body>
@@ -77,7 +76,7 @@
         <div id="header" class="{% block header_css_class %}d-flex{% endblock %}">
             <a href="{{ SITE_ROOT }}" id="logo">
                 {% if seacloud_mode %}
-                <img src="{{ MEDIA_URL }}img/seacloud_logo.png?t=1527242288" title="Seacloud" alt="logo" width="186" height="31" />
+                <img src="{{ MEDIA_URL }}img/seacloud_logo.png?t=1539583528" title="Seacloud" alt="logo" width="186" height="31" />
                 {% else %}
                 <img src="{{ MEDIA_URL }}{{ logo_path }}" title="{{ site_title }}" alt="logo" width="{{logo_width}}" height="{{logo_height}}" />
                 {% endif %}
@@ -104,8 +103,7 @@
                             <div class="item ovhd">
                                 {% avatar request.user 36 %}
                                 <div class="txt">
-                                    {{ request.user.username|email2nickname }} <br />
-                                    {{ request.user.username|email2contact_email}}
+                                    {{ request.user.username|email2nickname }}
                                 </div>
                             </div>
                             <span class="loading-icon loading-tip"></span>
@@ -129,7 +127,7 @@
             </div>
             {% else %} {# for non-logged-in user #}
             <div id="lang">
-                <a href="#" id="lang-context" data-lang="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE|language_name_local }} <span class="icon-caret-down"></span></a>
+                <a href="#" id="lang-context" data-lang="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE|language_name_local|capfirst }} <span class="icon-caret-down"></span></a>
                 <div id="lang-context-selector" class="sf-popover hide">
                     <ul class="sf-popover-con">
                         {% for LANG in LANGUAGES %}
@@ -172,19 +170,39 @@
             <button class="simplemodal-close">{% trans "No" %}</button>
         </div>
 </div><!-- wrapper -->
-
+<script type="text/javascript">
+var SEAFILE_GLOBAL = {
+    csrfCookieName: '{{ CSRF_COOKIE_NAME }}'
+};
+var app = {
+    ui : {
+        currentDropdown: false,
+        currentHighlightedItem: false,
+        freezeItemHightlight: false
+    }
+}
+</script>
 <script type="text/javascript" src="{% static "scripts/lib/jquery.min.js" %}" id="jquery"></script>{# 'id="jquery"' is for pdf file view with pdf2html #}
 <script type="text/javascript" src="{% static "scripts/lib/jquery.simplemodal.js" %}"></script>
 <script type="text/javascript" src="{% static "scripts/lib/jstree.min.js" %}"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jq.min.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/base.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/base.js?t=1539583528"></script>
 <script type="text/javascript">
-function ajaxErrorHandler(xhr, textStatus, errorThrown) {
+function prepareAjaxErrorMsg(xhr) {
+    var error_msg;
     if (xhr.responseText) {
-        feedback(JSON.parse(xhr.responseText).error||JSON.parse(xhr.responseText).error_msg, 'error');
+        var parsed_resp = JSON.parse(xhr.responseText);
+        // use `HTMLescape` for msgs which contain variable like 'path'
+        error_msg = HTMLescape(parsed_resp.error ||
+                parsed_resp.error_msg || parsed_resp.detail);
     } else {
-        feedback("{% trans "Failed. Please check the network." %}", 'error');
+        error_msg = gettext("Failed. Please check the network.");
     }
+    return error_msg;
+}
+function ajaxErrorHandler(xhr, textStatus, errorThrown) {
+    var error_msg = prepareAjaxErrorMsg(xhr);
+    feedback(error_msg, 'error');
 }
 {% if request.user.is_authenticated %}
 {% if request.cur_note %}
