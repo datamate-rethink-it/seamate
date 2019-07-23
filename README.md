@@ -1,3 +1,9 @@
+# ATTENTION: seamate is dead, long live seamate!
+
+The development of this github-project was stopped. A new version (compatible with Seafile 6.3 and 7.x) and all future developments can be found at https://www.datamate.org/seafile/seamate.
+
+----
+
 # What is seamate?
 
 Seamate is an add-on for [Seahub](https://github.com/haiwen/seahub), the web interface of the file syncing and sharing software [Seafile](https://github.com/haiwen/seafile), that allows the easy modification of Seahub‘s look.
