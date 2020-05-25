@@ -1,6 +1,6 @@
-# ATTENTION: seamate is dead, long live seamate!
+# seamate is dead, long live seamate!
 
-The development of this github-project was stopped. A new version (compatible with Seafile 6.3 and 7.x) and all future developments can be found at https://www.datamate.org/seafile/seamate.
+The development of this github project was discontinued. A new version (compatible with Seafile 6.3 and 7.x) and all future developments can be found at https://www.datamate.org/seafile/seamate.
 
 ----
 
